@@ -177,12 +177,14 @@ local function httpGet(url)
 end
 
 -- Menu link pinned to the newest commit, or the branch link if the API can't be reached
+local latestSha = nil -- commit the menu was downloaded from (lets the menu spot newer releases)
 local function freshMenuUrl()
     local body = httpGet(LATEST_COMMIT_API)
     local ok, data = pcall(function()
         return HttpService:JSONDecode(body)
     end)
     if ok and type(data) == "table" and type(data.sha) == "string" and #data.sha == 40 then
+        latestSha = data.sha
         return RAW .. data.sha .. "/UnderstandingMenu.lua"
     end
     return MENU_URL
@@ -237,6 +239,7 @@ if not fn then
 end
 _G._UnderstandingLoader = MENU_URL -- fallback for teleports
 _G._UnderstandingLoaderScript = LOADER_URL -- teleports re-run this loader (card, retries, visible errors)
+_G._UnderstandingSha = source == "GitHub" and latestSha or nil
 local ok, runErr = pcall(fn)
 if not ok then
     return fail("Menu crashed while starting: " .. tostring(runErr))
