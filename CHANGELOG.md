@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.8
+- Home tab: right-click any toggle, button or slider and choose Add to Home
+- Home also shows this server: players, uptime, a ping graph, copy server ID or join link
+- Players tab: distance and team on every row, sort by distance, profile card for the selected player
+- Notification settings (Appearance): corner, how long they stay, mute info messages
+
 ## v5.7
 - Spectate works in more games: switches to a backup camera if the game blocks the normal one
 - Quick toggle: type in the title-bar search and press Enter to switch the top match
