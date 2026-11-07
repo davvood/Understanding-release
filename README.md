@@ -7,3 +7,5 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/davvood/Understanding
 ```
 
 Press **C** to open and close the menu.
+
+What changed in each version: [CHANGELOG.md](CHANGELOG.md)
