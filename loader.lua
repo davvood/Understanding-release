@@ -7,9 +7,13 @@
     copy you put in the executor workspace yourself (UnderstandingMenu.lua).
 ]]
 
-local BASE = "https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/"
+local RAW = "https://raw.githubusercontent.com/davvood/Understanding-release/"
+local BASE = RAW .. "refs/heads/main/"
 local MENU_URL = BASE .. "UnderstandingMenu.lua"
 local LOADER_URL = BASE .. "loader.lua"
+-- Branch links are cached by GitHub for up to 5 minutes after a publish; links pinned to a
+-- commit are always exact. This API call says which commit is newest (cached ~1 minute).
+local LATEST_COMMIT_API = "https://api.github.com/repos/davvood/Understanding-release/commits/main"
 local CACHE_FILE = "Understanding_cache.lua"
 local LOCAL_FILE = "UnderstandingMenu.lua"
 
@@ -19,6 +23,7 @@ if not game:IsLoaded() then
 end
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
+local HttpService = game:GetService("HttpService")
 while not Players.LocalPlayer do
     task.wait()
 end
@@ -171,6 +176,18 @@ local function httpGet(url)
     return nil
 end
 
+-- Menu link pinned to the newest commit, or the branch link if the API can't be reached
+local function freshMenuUrl()
+    local body = httpGet(LATEST_COMMIT_API)
+    local ok, data = pcall(function()
+        return HttpService:JSONDecode(body)
+    end)
+    if ok and type(data) == "table" and type(data.sha) == "string" and #data.sha == 40 then
+        return RAW .. data.sha .. "/UnderstandingMenu.lua"
+    end
+    return MENU_URL
+end
+
 local function looksLikeMenu(src)
     return type(src) == "string" and #src > 1000 and src:find("UnderstandingDestroy", 1, true) ~= nil
 end
@@ -185,7 +202,7 @@ end
 step("Downloading menu...", 0.25)
 local src, source = nil, nil
 for attempt = 1, 3 do
-    local body = httpGet(MENU_URL .. "?t=" .. tostring(os.time())) -- skip stale CDN copies
+    local body = httpGet(freshMenuUrl())
     if looksLikeMenu(body) then
         src, source = body, "GitHub"
         break
