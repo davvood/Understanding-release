@@ -7,12 +7,21 @@
     copy you put in the executor workspace yourself (UnderstandingMenu.lua).
 ]]
 
-local MENU_URL = "https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/UnderstandingMenu.lua"
+local BASE = "https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/"
+local MENU_URL = BASE .. "UnderstandingMenu.lua"
+local LOADER_URL = BASE .. "loader.lua"
 local CACHE_FILE = "Understanding_cache.lua"
 local LOCAL_FILE = "UnderstandingMenu.lua"
 
+-- After a teleport this runs as soon as the new server starts: wait until the game has loaded
+if not game:IsLoaded() then
+    game.Loaded:Wait()
+end
 local Players = game:GetService("Players")
 local TweenService = game:GetService("TweenService")
+while not Players.LocalPlayer do
+    task.wait()
+end
 local lp = Players.LocalPlayer
 
 -- ── Loading card ─────────────────────────────────────────
@@ -209,7 +218,8 @@ local fn, compileErr = loadstring(src)
 if not fn then
     return fail("Menu failed to compile: " .. tostring(compileErr))
 end
-_G._UnderstandingLoader = MENU_URL -- teleports re-run the menu from this URL
+_G._UnderstandingLoader = MENU_URL -- fallback for teleports
+_G._UnderstandingLoaderScript = LOADER_URL -- teleports re-run this loader (card, retries, visible errors)
 local ok, runErr = pcall(fn)
 if not ok then
     return fail("Menu crashed while starting: " .. tostring(runErr))
