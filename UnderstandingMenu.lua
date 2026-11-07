@@ -293,10 +293,10 @@ UDim2.new(1,-12,1,0),UDim2.fromOffset(12,0),'Toggle Key:  C',U.txt,13)local bn=a
 .Text='Toggle Key:  [press any key...]'bm.TextColor3=U.accent z(true)local bp bp=c.InputBegan:Connect(function(bq)if bq.UserInputType~=Enum.UserInputType.Keyboard then return end bp:Disconnect()z(false)local br=aS(bq.KeyCode,
 'the menu toggle')aC=bq.KeyCode bm.Text='Toggle Key:  '..bq.KeyCode.Name bm.TextColor3=U.txt bo=false if br then Z('Key already in use',bq.KeyCode.Name..' is also bound to '..br..'. Both will trigger.',6,true)end end)end)bl.MouseEnter:
 Connect(function()aa(bl,0.1,{BackgroundColor3=U.bg3})end)bl.MouseLeave:Connect(function()aa(bl,0.1,{BackgroundColor3=U.bg2})end)a2(bh,bk(),'Rejoin')local bp local bq='Understanding_teleport_state.txt'local br=
-[[https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/loader.lua]]local bs=(syn and syn.queue_on_teleport)or queue_on_teleport or queueonteleport local function bt(bu)return'loadstring(game:HttpGet("'..bu..
-'", true))()'end local function bu()local bv=_G._UnderstandingLoaderScript if type(bv)=='string'and bv~=''then return bt(bv),false end local bw=_G._UnderstandingLoader if type(bw)=='string'and bw~=''then return'_G._UnderstandingLoader="'..
-bw..'"; '..bt(bw),false end for bx,by in ipairs({'UnderstandingMenu.lua','Understanding_menu.lua'})do local bz,bA=pcall(readfile,by)if bz and type(bA)=='string'and#bA>100 then return bA,false end end return bt(br),true end local function bv
-()if not bs then Z('Teleport',[[Your executor can't queue scripts, so the menu won't reload.]],4,true)return end pcall(function()writefile(bq,bp())end)local bw,bx=bu()local by=
+[[https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/loader.lua]]local bs=(syn and syn.queue_on_teleport)or queue_on_teleport or queueonteleport local function bt(bu)return'loadstring(game:HttpGet("'..bu..'?t='
+..os.time()..'", true))()'end local function bu()local bv=_G._UnderstandingLoaderScript if type(bv)=='string'and bv~=''then return bt(bv),false end local bw=_G._UnderstandingLoader if type(bw)=='string'and bw~=''then return
+'_G._UnderstandingLoader="'..bw..'"; '..bt(bw),false end for bx,by in ipairs({'UnderstandingMenu.lua','Understanding_menu.lua'})do local bz,bA=pcall(readfile,by)if bz and type(bA)=='string'and#bA>100 then return bA,false end end return bt(
+br),true end local function bv()if not bs then Z('Teleport',[[Your executor can't queue scripts, so the menu won't reload.]],4,true)return end pcall(function()writefile(bq,bp())end)local bw,bx=bu()local by=
 [[if not game:IsLoaded() then game.Loaded:Wait() end
 _G._UnderstandingAutoload = true
 ]]..bw local bz,bA=pcall(bs,by)if not bz then Z('Teleport',"Couldn't queue the menu: "..tostring(bA),5,true)elseif bx then Z('Teleport',
