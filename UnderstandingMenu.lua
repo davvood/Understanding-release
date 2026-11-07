@@ -23,7 +23,7 @@ txt,15,Enum.Font.GothamBold,nil,101)local ar=ab(ap,UDim2.new(1,-30,0,ao-44),UDim
 local as=table.find(ae,ap)if as then table.remove(ae,as)end aa(ap,0.18,{Position=UDim2.new(1,af+20,1,ap.Position.Y.Offset)})ak()task.delay(0.25,function()if ap and ap.Parent then ap:Destroy()end end)end)end local al,am,an=720,500,130 local
 ao=Y(ad,UDim2.fromOffset(al,am),UDim2.fromScale(0.5,0.5),U.bg1,0,1,true)ao.AnchorPoint=Vector2.new(0.5,0.5)V(10,ao)W(U.border,1,0,ao)ao.Active=true local ap=Instance.new('UIScale')ap.Parent=ao local aq=Y(ao,UDim2.new(1,0,0,38),UDim2.new(0,0
 ,0,0),U.bg0)Y(aq,UDim2.new(1,0,0,1),UDim2.new(0,0,1,-1),U.border)local ar=Y(aq,UDim2.fromOffset(8,8),UDim2.new(0,14,0.5,-4),U.accent)V(4,ar)local as=ab(aq,UDim2.new(1,-300,1,0),UDim2.fromOffset(30,0),
-'Understanding  <font color="#6c6c80" size="11">v5.2</font>',U.txt,14,Enum.Font.GothamBold)as.RichText=true local function _(at,au,av,aw)local ax=ac(aq,UDim2.fromOffset(26,26),UDim2.new(1,au,0.5,-13),at,U.bg0,U.dim,14,Enum.Font.GothamBold)
+'Understanding  <font color="#6c6c80" size="11">v5.3</font>',U.txt,14,Enum.Font.GothamBold)as.RichText=true local function _(at,au,av,aw)local ax=ac(aq,UDim2.fromOffset(26,26),UDim2.new(1,au,0.5,-13),at,U.bg0,U.dim,14,Enum.Font.GothamBold)
 ax.BackgroundTransparency=1 ax.TextXAlignment=Enum.TextXAlignment.Center V(6,ax)ax.MouseEnter:Connect(function()aa(ax,0.1,{BackgroundTransparency=0,BackgroundColor3=av,TextColor3=aw})end)ax.MouseLeave:Connect(function()aa(ax,0.1,{
 BackgroundTransparency=1,TextColor3=U.dim})end)return ax end local at=_('x',-32,Color3.fromRGB(70,28,32),Color3.fromRGB(235,110,110))local au=_('-',-60,U.bg3,U.txt)local av=false au.MouseButton1Click:Connect(function()av=not av aa(ao,0.18,{
 Size=UDim2.fromOffset(al,av and 38 or am)})end)local aw='Understanding_ui.json'local ax={}pcall(function()if isfile and isfile(aw)then local ay=i:JSONDecode(readfile(aw))if type(ay)=='table'then ax=ay end end end)local ay=false local 
@@ -392,5 +392,5 @@ UDim2.new(1,0,0,26),nil,'',U.bg3,U.txt,12)bD.BackgroundTransparency=0.5 V(4,bD)l
 MouseButton1Click:Connect(function()K(bC.reg,bC.bold,bC.rn,bC.bn)end)bD.MouseEnter:Connect(function()aa(bD,0.1,{BackgroundTransparency=0})end)bD.MouseLeave:Connect(function()aa(bD,0.1,{BackgroundTransparency=0.5})end)end a2(bg,bk(),
 'Menu Scale')a9(bg,bk(),'Menu Scale',50,200,100,'%',function(bB)ap.Scale=bB/100 end)local bB=Y(bg,UDim2.new(1,0,0,14),nil,U.bg1,1)bB.LayoutOrder=bk()ab(bB,UDim2.new(1,0,1,0),nil,'Drag the title bar to reposition after scaling.',U.dim,10,nil
 ,Enum.TextXAlignment.Center)end _G.UnderstandingDestroy=function()aR()for bj,bk in ipairs(t)do local bl,bm=pcall(bk)if not bl then warn('[Understanding] cleanup error: '..tostring(bm))end end for bj,bk in ipairs(p)do pcall(function()bk:
-Disconnect()end)end p={}pcall(function()ad:Destroy()end)_G.UnderstandingDestroy=nil print('[Understanding] unloaded.')end Z('Understanding','v5.2  \u{2022}  Appearance  \u{2022}  Auto-Follow  \u{2022}  C to toggle',4)print(
-'[Understanding] v5.2 ready.')
+Disconnect()end)end p={}pcall(function()ad:Destroy()end)_G.UnderstandingDestroy=nil print('[Understanding] unloaded.')end Z('Understanding','v5.3  \u{2022}  Appearance  \u{2022}  Auto-Follow  \u{2022}  C to toggle',4)print(
+'[Understanding] v5.3 ready.')
