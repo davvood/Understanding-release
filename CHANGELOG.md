@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.21
+- New Follow Player (Players tab): walks after the selected player, finds a way around walls and stops a few studs away
+- Follow Distance slider (3-15 studs); walk yourself with WASD at any time, click another player to switch
+- The old teleporting Auto Follow in Trolling is gone
+
 ## v5.20.3
 - The Understanding logo now shows next to the name (on executors that support custom images)
 
