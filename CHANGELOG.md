@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.15
+- Click a section title to fold it; options that don't apply yet stay hidden until they do
+- Bar along the bottom shows what's on (click to turn off), and each tab shows how many
+- Tab icons, a Compact Sidebar option, and drag the bottom-right corner to resize the window
+- Colour pickers for chams, name ESP and tracers; dropdowns for notification corner and emote sort
+- Notification history (bell in the title bar), Background Blur, red dot on risky features
+
 ## v5.14
 - New Animations tab: 18 Roblox animation packs; right-click a pack to mix and match parts
 - New Servers tab: rejoin, previous server, server browser and a new Smallest-server hop
