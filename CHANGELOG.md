@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.9.1
+- Fixed: emotes didn't play with Keep Emote While Moving on (and stopped when walking with it off)
+
 ## v5.9
 - Emotes keep playing when you walk (new 'Keep Emote While Moving' option, on by default)
 - Emotes tab reorganised: one list with filters (All, Favourites, Keybinds, Recent) and sorting
