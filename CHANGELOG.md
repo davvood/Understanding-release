@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.11
+- Library now only shows emotes that aren't in a folder yet (Unfiled)
+- Hide Purchase Prompts (World): no more 'buy this' pop-ups
+- Remove Invisible Walls (World): walk through invisible barriers; floors stay solid
+
 ## v5.10
 - Emote folders: My Emotes view with Favourites, Dances, Sitting & Poses, Greetings, plus your own
 - Right-click an emote to put it in any folders; the star still adds to Favourites in one click
