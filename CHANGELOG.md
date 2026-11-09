@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.20.2
+- ESP labels above a player sit a little higher, clear of their head
+- Labels in the ESP preview sit right next to the box on every side
+
 ## v5.20.1
 - ESP preview lines up with the menu (same top and height)
 - Dragging a label in the preview now stays under your cursor
