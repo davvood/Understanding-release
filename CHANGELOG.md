@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.18
+- Object ESP (Visuals): see doors, chests, shops, dropped tools or anything by name through walls
+- Air Walk (Myself): walk on an invisible floor in mid-air; jump to go up, hold Ctrl to go down
+- Chat Log (Players): scroll back, search and copy public chat; optional alert when someone says your name
+- Music player (Home): play sounds only you hear, with 8 tracks from Roblox's library and a saved list
+- Fixed: Tracers can be turned on without another ESP being on
+
 ## v5.17
 - Full remake: rounded floating panels, line icons in the sidebar and header
 - Drag the window from any empty space, and scale it from any corner
