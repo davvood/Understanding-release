@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.11.1
+- Hide Purchase Prompts now also hides Roblox's new 'Buy Robux and item' window
+
 ## v5.11
 - Library now only shows emotes that aren't in a folder yet (Unfiled)
 - Hide Purchase Prompts (World): no more 'buy this' pop-ups
