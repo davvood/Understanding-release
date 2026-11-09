@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.15.1
+- Dragging the bottom-right corner now scales the whole menu (same as Menu Scale), and it's remembered
+- Removed the feature counts on the tabs and the red dots (the tooltip warning stays)
+
 ## v5.15
 - Click a section title to fold it; options that don't apply yet stay hidden until they do
 - Bar along the bottom shows what's on (click to turn off), and each tab shows how many
