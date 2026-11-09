@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.20.1
+- ESP preview lines up with the menu (same top and height)
+- Dragging a label in the preview now stays under your cursor
+- Dropdowns, colour pickers and the notification log open exactly next to their button
+
 ## v5.20
 - New player ESP: box (full or corners), name, distance, held item, health bar and number, skeleton, head dot
 - Tracers from the bottom, middle, top or your mouse; arrows for players off screen; NPC ESP
