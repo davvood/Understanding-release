@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.12.2
+- Server location: retries Roblox's security check, and says exactly why when it can't find the server
+
 ## v5.12.1
 - Server location: also reads the address from the client's own join log, so it works without Roblox login access
 
