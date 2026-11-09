@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.16
+- New look: cleaner, darker design with each section grouped into one card
+- Sidebar without emoji, grouped into Player, Style, World and Menu
+- Slimmer switches and sliders, key caps for keybinds, quieter title bar and active bar
+
 ## v5.15.1
 - Dragging the bottom-right corner now scales the whole menu (same as Menu Scale), and it's remembered
 - Removed the feature counts on the tabs and the red dots (the tooltip warning stays)
