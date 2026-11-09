@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.20
+- New player ESP: box (full or corners), name, distance, held item, health bar and number, skeleton, head dot
+- Tracers from the bottom, middle, top or your mouse; arrows for players off screen; NPC ESP
+- Visible Check colours players by whether a wall is in the way; text background and size
+- ESP preview next to the menu on the Visuals tab, on your own avatar: drag a label to move it
+
 ## v5.19
 - New compact layout: sections sit side by side in two columns, each a card with its title inside
 - Checkboxes instead of switches; colour swatches and keybinds sit on the feature's own row
