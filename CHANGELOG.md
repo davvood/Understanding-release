@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.22
+- Radar (Visuals): a small map of the players around you that turns with your camera; friends in green, names optional
+- Crosshair (Visuals): cross, T-shape or dot with your own colour, length, gap, thickness, outline, centre dot and spin
+- Active Features List: everything that's on, shown in the top-right corner while you play
+- Radar and the list can be dragged anywhere and remember their spot
+
 ## v5.21
 - New Follow Player (Players tab): walks after the selected player, finds a way around walls and stops a few studs away
 - Follow Distance slider (3-15 studs); walk yourself with WASD at any time, click another player to switch
