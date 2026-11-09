@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.10
+- Emote folders: My Emotes view with Favourites, Dances, Sitting & Poses, Greetings, plus your own
+- Right-click an emote to put it in any folders; the star still adds to Favourites in one click
+- Rename a folder by clicking its name; open/close it by clicking the header
+- Tidier Emotes tab: My Emotes / Library switch, page controls under the list
+
 ## v5.9.1
 - Fixed: emotes didn't play with Keep Emote While Moving on (and stopped when walking with it off)
 
