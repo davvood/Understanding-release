@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.12
+- Home: the server card shows where the server is (city, region, country) when your executor allows the lookup
+
 ## v5.11.2
 - Hide Purchase Prompts now closes the window (like pressing its X), so no dark screen or frozen controls
 
