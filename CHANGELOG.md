@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.11.2
+- Hide Purchase Prompts now closes the window (like pressing its X), so no dark screen or frozen controls
+
 ## v5.11.1
 - Hide Purchase Prompts now also hides Roblox's new 'Buy Robux and item' window
 
