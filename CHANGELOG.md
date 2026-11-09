@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.12.1
+- Server location: also reads the address from the client's own join log, so it works without Roblox login access
+
 ## v5.12
 - Home: the server card shows where the server is (city, region, country) when your executor allows the lookup
 
