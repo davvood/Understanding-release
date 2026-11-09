@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.9
+- Emotes keep playing when you walk (new 'Keep Emote While Moving' option, on by default)
+- Emotes tab reorganised: one list with filters (All, Favourites, Keybinds, Recent) and sorting
+- Search emotes by name or ID; Random button; Now Playing bar with Stop
+- Emote Speed slider
+
 ## v5.8
 - Home tab: right-click any toggle, button or slider and choose Add to Home
 - Home also shows this server: players, uptime, a ping graph, copy server ID or join link
