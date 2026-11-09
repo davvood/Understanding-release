@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.20.3
+- The Understanding logo now shows next to the name (on executors that support custom images)
+
 ## v5.20.2
 - ESP labels above a player sit a little higher, clear of their head
 - Labels in the ESP preview sit right next to the box on every side
