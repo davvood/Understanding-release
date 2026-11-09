@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.19
+- New compact layout: sections sit side by side in two columns, each a card with its title inside
+- Checkboxes instead of switches; colour swatches and keybinds sit on the feature's own row
+- Slimmer sliders, dropdowns and text boxes, and a wider window
+
 ## v5.18
 - Object ESP (Visuals): see doors, chests, shops, dropped tools or anything by name through walls
 - Air Walk (Myself): walk on an invisible floor in mid-air; jump to go up, hold Ctrl to go down
