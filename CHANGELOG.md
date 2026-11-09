@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.12.3
+- Server location says 'not available on this executor' instead of a technical message when it can't be looked up
+
 ## v5.12.2
 - Server location: retries Roblox's security check, and says exactly why when it can't find the server
 
