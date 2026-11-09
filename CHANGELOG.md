@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.17
+- Full remake: rounded floating panels, line icons in the sidebar and header
+- Drag the window from any empty space, and scale it from any corner
+- New notifications: icon, timer bar, hover to pause, click to dismiss
+- Smoother motion (switch off in Appearance → Reduce Motion)
+
 ## v5.16
 - New look: cleaner, darker design with each section grouped into one card
 - Sidebar without emoji, grouped into Player, Style, World and Menu
