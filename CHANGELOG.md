@@ -1,5 +1,14 @@
 # Changelog
 
+## v5.23
+- Walk to a saved spot: a Walk button next to Go in Saved Teleports (finds its way around walls; WASD stops it)
+- World: sky presets, Exposure, Ambient Light, Remove Shadows and a Personal Light only you can see
+- World: Click to Delete Parts on your screen, with Undo and Restore
+- Camera: Camera Through Walls, force first or third person, Freecam to Target
+- Rejoin Where You Stood, and Fly / Noclip now carry the vehicle you're sitting in
+- Loud Sound Limiter, mute one player's sounds, Low FPS / Ping Alerts and Streamer Mode
+- Fixed: Fullbright and Clear Weather Effects stopped with an error in games with an Atmosphere
+
 ## v5.22
 - Radar (Visuals): a small map of the players around you that turns with your camera; friends in green, names optional
 - Crosshair (Visuals): cross, T-shape or dot with your own colour, length, gap, thickness, outline, centre dot and spin
