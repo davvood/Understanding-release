@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.14
+- New Animations tab: 18 Roblox animation packs; right-click a pack to mix and match parts
+- New Servers tab: rejoin, previous server, server browser and a new Smallest-server hop
+- Join / leave alerts (Players), optionally friends only
+- Field of View and X-Ray (Visuals), Gravity (World), Hip Height (Myself)
+- Anti-Void and Respawn Where You Died (Myself)
+
 ## v5.13
 - Much lighter: the 60,000-emote list loads ~7x faster and uses ~100 MB less memory
 - Emote search and the Library react instantly (no more freezes while typing)
