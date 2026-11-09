@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.13
+- Much lighter: the 60,000-emote list loads ~7x faster and uses ~100 MB less memory
+- Emote search and the Library react instantly (no more freezes while typing)
+- Less work every frame: labels only redraw when they change, sliders share one listener
+- Fixed a slow leak when changing Home favourites
+
 ## v5.12.3
 - Server location says 'not available on this executor' instead of a technical message when it can't be looked up
 
