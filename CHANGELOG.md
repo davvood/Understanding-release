@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.23.4
+- ESP preview: no longer zoomed in - it zooms out until your whole avatar fits (hair, crowns, tails), with the box around the body like in the game
+- ESP preview: a label you drag follows the pointer again
+
 ## v5.23.3
 - ESP preview: the box now fits your avatar the way it does in the game (hats, wings and floating effects no longer shrink the avatar)
 - ESP preview: the skeleton follows your avatar's own body instead of a fixed stick figure
