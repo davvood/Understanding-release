@@ -1,6 +1,7 @@
+-- Understanding v5.24.1 (c) 2026 Understanding. All rights reserved. Not for redistribution, resale or reupload. See LICENSE.
 if _G.UnderstandingDestroy then pcall(_G.UnderstandingDestroy)task.wait(0.05)end local a=game:GetService('Players')local b=game:GetService('RunService')local c=game:GetService('UserInputService')local d=game:GetService('TweenService')local
 e=game:GetService('Lighting')local f=game:GetService('GroupService')local g=game:GetService('VirtualUser')local h=game:GetService('TeleportService')local i=game:GetService('HttpService')local j=game:GetService('GuiService')local k=game:
-GetService('Stats')local l=game:GetService('VoiceChatService')local m=nil pcall(function()m=game:GetService('VoiceChatInternal')end)if not game:IsLoaded()then game.Loaded:Wait()end while not a.LocalPlayer do task.wait()end local n='v5.24'
+GetService('Stats')local l=game:GetService('VoiceChatService')local m=nil pcall(function()m=game:GetService('VoiceChatInternal')end)if not game:IsLoaded()then game.Loaded:Wait()end while not a.LocalPlayer do task.wait()end local n='v5.24.1'
 local o=a.LocalPlayer while not workspace.CurrentCamera do task.wait()end local p=workspace.CurrentCamera local q={}local r={}local s={}local t={}if type(_G._UnderstandingTestHooks)=='table'then _G._UnderstandingTestHooks.toggles=r _G.
 _UnderstandingTestHooks.sliders=s _G._UnderstandingTestHooks.buttons=t end local u={}local v={}local w={}local x={}local y=nil local z=nil local function A(B,C,D)if B[C]~=D then B[C]=D end end local function B(C)for D,E in ipairs(C:
 GetChildren())do if E:IsA('GuiObject')then E:Destroy()end end end local function C()local D,E=pcall(function()return k.Network.ServerStatsItem['Data Ping']:GetValue()end)return D and tonumber(E)or nil end local D do local E=64 D=function(F)
@@ -1153,6 +1154,7 @@ do table.insert(cd,'  \u{2022}  '..ch)end end if#cd>0 then task.delay(1,function
 [[https://api.github.com/repos/davvood/Understanding-release/git/trees/]]local function cc(cd)local ce,cf=pcall(function()return i:JSONDecode(I(cb..cd))end)if ce and type(cf)=='table'and type(cf.tree)=='table'then for cg,ch in ipairs(cf.
 tree)do if ch.path=='UnderstandingMenu.lua'then return ch.sha end end end return nil end local cd=nil local ce=true local cf=nil table.insert(v,function()ce=false if cf then pcall(task.cancel,cf)end end)cf=task.spawn(function()local cg=nil
 while ce do task.wait(300)local ch=_G._UnderstandingSha if not ce or type(ch)~='string'then continue end cg=cg or cc(ch)local ci=cg and cc('main')if type(ci)=='string'and ci~=cg and ci~=cd then cd=ci ca('Update available',
-[[A newer version of the menu was just published. Reload now? Your current settings are kept.]],{{text='Reload',onClick=function()if R then R()end end},{text='Later'}})end end end)end _G.UnderstandingDestroy=function()bz()for cb,cc in
-ipairs(v)do ax('unload cleanup',cc)end ax('unload cleanup',E)for cb,cc in ipairs(q)do pcall(function()cc:Disconnect()end)end q={}pcall(function()an:Destroy()end)_G.UnderstandingDestroy=nil print('[Understanding] unloaded.')end av(
-'Understanding',n..'  \u{2022}  C to toggle',4)print('[Understanding] '..n..' ready.')
+[[A newer version of the menu was just published. Reload now? Your current settings are kept.]],{{text='Reload',onClick=function()if R then R()end end},{text='Later'}})end end end)end _G.UnderstandingSignature=
+[[Understanding (c) 2026 Understanding. All rights reserved. Not for redistribution, resale or reupload.]]_G.UnderstandingDestroy=function()bz()for cb,cc in ipairs(v)do ax('unload cleanup',cc)end ax('unload cleanup',E)for cb,cc in ipairs(q)
+do pcall(function()cc:Disconnect()end)end q={}pcall(function()an:Destroy()end)_G.UnderstandingDestroy=nil _G.UnderstandingSignature=nil print('[Understanding] unloaded.')end av('Understanding',n..'  \u{2022}  C to toggle',4)print(
+'[Understanding] '..n..' ready.')
