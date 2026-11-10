@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.25.1
+- Home: Join the Discord now sits right under your favourites
+- Home: the music player is gone
+
 ## v5.25
 - Join the Discord: new button at the bottom of the Home tab (copies the invite)
 - Welcome card the first time you run the menu, with the basics
