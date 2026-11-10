@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.24
+- New watermark in the menu's own style: separate cells for FPS, ping and the time; FPS and ping turn yellow or red when they get bad
+- Choose what the watermark shows: Watermark FPS, Watermark Ping, Watermark Clock (Visuals > Overlays)
+- New Keybind List: real rows with a dot and a key cap, a header that counts what is on, and it grows to fit long names
+- Only Active Keybinds: the list only shows the features that are on
+
 ## v5.23.5
 - The loader now always gets the newest version straight after a release (it could give the previous one for a few minutes)
 
