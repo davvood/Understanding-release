@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.23.3
+- ESP preview: the box now fits your avatar the way it does in the game (hats, wings and floating effects no longer shrink the avatar)
+- ESP preview: the skeleton follows your avatar's own body instead of a fixed stick figure
+- ESP preview: labels on the left or right are no longer cut off - the box makes room for them
+
 ## v5.23.2
 - More clean-up: changing animation packs no longer leaves old animations loaded
 - Browsing the emote Library for a long time no longer keeps growing memory
