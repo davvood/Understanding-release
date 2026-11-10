@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.23.2
+- More clean-up: changing animation packs no longer leaves old animations loaded
+- Browsing the emote Library for a long time no longer keeps growing memory
+- Turning X-Ray or Performance Mode off, and turning the Loud Sound Limiter on, no longer hitch on big maps
+- Invisible recovers by itself if it fails in a game (the toggle used to stay stuck)
+
 ## v5.23.1
 - Big clean-up for long sessions: less memory used over time and less work every frame
 - ESP is lighter in full servers (skeleton, boxes and labels only update what changed)
