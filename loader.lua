@@ -12,7 +12,9 @@ local BASE = RAW .. "refs/heads/main/"
 local MENU_URL = BASE .. "UnderstandingMenu.lua"
 local LOADER_URL = BASE .. "loader.lua"
 -- Branch links are cached by GitHub for up to 5 minutes after a publish; links pinned to a
--- commit are always exact. This API call says which commit is newest (cached ~1 minute).
+-- commit are always exact. This API call says which commit is newest. Its answer may be cached
+-- for a minute (also by Roblox itself, which is why a reload right after a release used to give
+-- the old version), so every request gets a different "?t=" ending: nothing can answer it from a cache.
 local LATEST_COMMIT_API = "https://api.github.com/repos/davvood/Understanding-release/commits/main"
 local CACHE_FILE = "Understanding_cache.lua"
 local LOCAL_FILE = "UnderstandingMenu.lua"
@@ -179,7 +181,8 @@ end
 -- Menu link pinned to the newest commit, or the branch link if the API can't be reached
 local latestSha = nil -- commit the menu was downloaded from (lets the menu spot newer releases)
 local function freshMenuUrl()
-    local body = httpGet(LATEST_COMMIT_API)
+    local fresh = "?t=" .. os.time() .. math.random(1000, 9999) -- never the same link twice
+    local body = httpGet(LATEST_COMMIT_API .. fresh)
     local ok, data = pcall(function()
         return HttpService:JSONDecode(body)
     end)
@@ -187,7 +190,7 @@ local function freshMenuUrl()
         latestSha = data.sha
         return RAW .. data.sha .. "/UnderstandingMenu.lua"
     end
-    return MENU_URL
+    return MENU_URL .. fresh -- the branch link (cached up to 5 minutes), also made unique
 end
 
 local function looksLikeMenu(src)

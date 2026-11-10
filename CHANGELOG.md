@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.23.5
+- The loader now always gets the newest version straight after a release (it could give the previous one for a few minutes)
+
 ## v5.23.4
 - ESP preview: no longer zoomed in - it zooms out until your whole avatar fits (hair, crowns, tails), with the box around the body like in the game
 - ESP preview: a label you drag follows the pointer again
