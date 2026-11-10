@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.25
+- Join the Discord: new button at the bottom of the Home tab (copies the invite)
+- Welcome card the first time you run the menu, with the basics
+- The menu tells you once which features your executor can't run, so nothing quietly does nothing
+
 ## v5.24
 - New watermark in the menu's own style: separate cells for FPS, ping and the time; FPS and ping turn yellow or red when they get bad
 - Choose what the watermark shows: Watermark FPS, Watermark Ping, Watermark Clock (Visuals > Overlays)
