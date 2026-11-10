@@ -1,5 +1,16 @@
 # Changelog
 
+## v5.23.1
+- Big clean-up for long sessions: less memory used over time and less work every frame
+- ESP is lighter in full servers (skeleton, boxes and labels only update what changed)
+- X-Ray, Remove Invisible Walls and Performance Mode always put the map back, and no longer freeze big maps when switched
+- Emotes keep working after hundreds of plays in one life; My Emotes and the Library are smoother with big collections
+- Fixed: Chat Spam or the Jerk Tool could keep running after turning them off or reloading
+- Fixed: Anti-Void could get stuck putting you back every frame on low maps
+- Fixed: turning Invisible off right after on could lose your character
+- Fixed: failed rejoins / server hops made the menu start several times in the next server
+- Fixed: the profile card now says when someone isn't your friend; chams no longer stay on far-away NPCs
+
 ## v5.23
 - Walk to a saved spot: a Walk button next to Go in Saved Teleports (finds its way around walls; WASD stops it)
 - World: sky presets, Exposure, Ambient Light, Remove Shadows and a Personal Light only you can see
