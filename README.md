@@ -28,7 +28,7 @@ Press **C** to open and close the menu. You can change the key in Settings.
 - Fly, Air Walk, Noclip, Infinite Jump, walk speed and jump power
 - Vehicle tab for any car you drive: speed boost, nitro, drift, grip, turn assist, jump, gravity, speedometer
 - Follow Player: walks after a friend and finds its way around walls
-- Saved teleports per game: teleport there or walk there
+- Teleports tab: your saved places, NPCs and items in one searchable list; teleport there or walk there
 
 **Emotes and animations**
 - About 60,000 emotes with search, folders and keybinds

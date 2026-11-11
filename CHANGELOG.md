@@ -1,5 +1,13 @@
 # Changelog
 
+## v5.28
+- New Teleports tab: your saved places, NPCs and items in one list you can search and filter
+- Go teleports you there, Walk goes on foot; same-named NPCs and items are one row that goes to the nearest
+- Items are dropped tools and things you can use or click; the search also finds any object by name
+- Back to Where I Was returns you to the spot before your last teleport
+- Right-click a saved place (or the back button) to give it a key
+- Saved Teleports moved here from the World tab: your saved places are kept
+
 ## v5.27.1
 - Home: a What's New section shows what changed in the newest versions, with a button for the older ones
 
