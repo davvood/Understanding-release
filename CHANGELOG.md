@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.31
+- New Wardrobe tab: save the avatars you like and try them on (only you see it)
+- Save a player's outfit from the Players tab, or anyone's by username
+- Buy opens Roblox's own avatar window for a saved outfit; Links copies the items' catalog links
+- Try Catalog Item puts one item or bundle on top of what you wear, from its ID or link
+
 ## v5.30
 - Vehicle: Cruise Control holds your speed; braking switches it off
 - Vehicle: Auto Dodge steers into the nearest gap when a car or wall is in the way, with a slider for how close it cuts

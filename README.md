@@ -35,6 +35,9 @@ Press **C** to open and close the menu. You can change the key in Settings.
 - About 60,000 emotes with search, folders and keybinds
 - Animation packs, emote speed, keep emoting while you move
 
+**Wardrobe**
+- Save any player's avatar, try it on (only you see it), and open Roblox's own window to buy its items later
+
 **Camera and world**
 - Freecam, camera through walls, field of view, X-Ray
 - Fullbright, sky presets, time of day, personal light
