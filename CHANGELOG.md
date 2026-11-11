@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.26
+- New Vehicle tab: works on any car, boat or kart you drive yourself
+- Speed Boost with top speed and acceleration, Nitro (give it a hold key) and Instant Brake
+- Turn Assist, Extra Grip, Downforce, Air Control, Anti-Flip and a Flip Vehicle button
+- Vehicle Jump on its own key (H until you change it), jump height, air jumps and vehicle gravity
+- Speedometer you can drag anywhere, in studs per second, km/h or mph
+
 ## v5.25.1
 - Home: Join the Discord now sits right under your favourites
 - Home: the music player is gone
