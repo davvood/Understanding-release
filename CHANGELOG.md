@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.26.1
+- Update notice: the check can no longer be answered with an old, saved reply, so a new version is noticed within 5 minutes
+- Settings > Script: Check for Updates looks for a new version right away
+
 ## v5.26
 - New Vehicle tab: works on any car, boat or kart you drive yourself
 - Speed Boost with top speed and acceleration, Nitro (give it a hold key) and Instant Brake
