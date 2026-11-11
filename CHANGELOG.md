@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.31.2
+- Vehicle: Cruise Control and Autopilot hold their speed across vehicles with wheel motors, movers, nested car models, and scripts that brake on RenderStepped / Stepped
+- Vehicle: Cruise Control remembers the speed you had before letting go of W to click the toggle, and has full power in cars that brake hard by themselves
+- Vehicle: Autopilot keeps its speed through gentle turns and skips route waypoints that have fallen behind the car
+- Vehicle: the Status box shows how hard the game slows the car while Cruise Control or Autopilot drives
+
 ## v5.31.1
 - Vehicle: Cruise Control really holds your speed now, uphill and downhill, also in cars that brake by themselves when you let go
 - Vehicle: Autopilot works without a destination: it drives around, keeps to the road it is on and takes a turning now and then
