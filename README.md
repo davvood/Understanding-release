@@ -27,6 +27,7 @@ Press **C** to open and close the menu. You can change the key in Settings.
 **Movement**
 - Fly, Air Walk, Noclip, Infinite Jump, walk speed and jump power
 - Vehicle tab for any car you drive: speed boost, nitro, drift, grip, turn assist, jump, gravity, speedometer
+- Self-driving: cruise control, auto dodge through traffic, autopilot to a saved place; flying car, driving on water and walls
 - Follow Player: walks after a friend and finds its way around walls
 - Teleports tab: your saved places, NPCs and items in one searchable list; teleport there or walk there
 

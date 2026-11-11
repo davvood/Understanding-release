@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.30
+- Vehicle: Cruise Control holds your speed; braking switches it off
+- Vehicle: Auto Dodge steers into the nearest gap when a car or wall is in the way, with a slider for how close it cuts
+- Vehicle: Autopilot drives to a saved place, or to anything in the Teleports list (the Walk button reads Drive while you sit in a car)
+- Vehicle: Flying Car - the car hovers, E goes up and Q down
+- Vehicle: Drive on Water and Wall Driving
+
 ## v5.29
 - New Automations tab: build your own rules, 'when this happens, do that'
 - When: health drops below a percent, an item or NPC appears, a player joins, you respawn, a key, a timer, the menu starts, you sit in a vehicle
