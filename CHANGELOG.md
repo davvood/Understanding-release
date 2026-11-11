@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.28.1
+- Teleports: an item you picked up no longer stays in the list (tools in a backpack or in someone's hand, switched-off prompts)
+- Teleports: a row whose thing is gone leaves the list within a couple of seconds
+
 ## v5.28
 - New Teleports tab: your saved places, NPCs and items in one list you can search and filter
 - Go teleports you there, Walk goes on foot; same-named NPCs and items are one row that goes to the nearest
