@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.31.1
+- Vehicle: Cruise Control really holds your speed now, uphill and downhill, also in cars that brake by themselves when you let go
+- Vehicle: Autopilot works without a destination: it drives around, keeps to the road it is on and takes a turning now and then
+- Vehicle: the Status box shows the speed Cruise Control holds and what Autopilot is doing
+
 ## v5.31
 - New Wardrobe tab: save the avatars you like and try them on (only you see it)
 - Save a player's outfit from the Players tab, or anyone's by username
