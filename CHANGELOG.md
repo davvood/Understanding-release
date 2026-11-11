@@ -1,5 +1,12 @@
 # Changelog
 
+## v5.29
+- New Automations tab: build your own rules, 'when this happens, do that'
+- When: health drops below a percent, an item or NPC appears, a player joins, you respawn, a key, a timer, the menu starts, you sit in a vehicle
+- Then: switch a feature on or off, teleport to a saved place, go back, load a config, show a notification
+- Each rule can be for this game or every game, has a wait time, and is kept between sessions
+- The panic key pauses your rules, so nothing switches back on by itself
+
 ## v5.28.1
 - Teleports: an item you picked up no longer stays in the list (tools in a backpack or in someone's hand, switched-off prompts)
 - Teleports: a row whose thing is gone leaves the list within a couple of seconds

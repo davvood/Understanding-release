@@ -43,6 +43,10 @@ Press **C** to open and close the menu. You can change the key in Settings.
 - Spectate, teleport to players, chat log, join and leave alerts
 - Server browser, server hop, rejoin where you stood
 
+**Automations**
+- Your own rules: "when my health drops below 30%, teleport to Base", "when a Golden Chest appears, tell me"
+- Triggers for health, items and NPCs, players joining, respawning, keys, timers and vehicles
+
 **Comfort**
 - A keybind for everything (right-click a toggle), plus a panic key
 - Configs you can save, load and share
