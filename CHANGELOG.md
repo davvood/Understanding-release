@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.27
+- Vehicle: Drift - the car slides through corners; give it a hold key for a handbrake-style drift button
+- Drift sliders: how long it slides, how fast it swings round, the widest angle, and power to keep the slide going
+
 ## v5.26.1
 - Update notice: the check can no longer be answered with an old, saved reply, so a new version is noticed within 5 minutes
 - Settings > Script: Check for Updates looks for a new version right away
