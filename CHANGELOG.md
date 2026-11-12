@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.32
+- Visuals: dragging Name, Distance, Weapon or the Health bar in the ESP Preview now follows your mouse live instead of jumping when you let go
+- Menu: smoother animations and transitions, a one-click clear button in the search bar, and faster tab switching
+- Performance: faster ESP, Radar and Overlays with less frame work when many players or objects are on screen
+- Reliability: cleaner reset of movement, camera, vehicle and character settings when you respawn or unload the menu
+
 ## v5.31.2
 - Vehicle: Cruise Control and Autopilot hold their speed across vehicles with wheel motors, movers, nested car models, and scripts that brake on RenderStepped / Stepped
 - Vehicle: Cruise Control remembers the speed you had before letting go of W to click the toggle, and has full power in cars that brake hard by themselves
