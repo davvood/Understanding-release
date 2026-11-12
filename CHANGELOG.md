@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.32.1
+- Players: Spectate now works across the whole map like Freecam even when a player's character is streamed out, and no longer turns off or snaps back in games that reset the camera every half second
+
 ## v5.32
 - Visuals: dragging Name, Distance, Weapon or the Health bar in the ESP Preview now follows your mouse live instead of jumping when you let go
 - Menu: smoother animations and transitions, a one-click clear button in the search bar, and faster tab switching
