@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.32.4
+- Settings: Server Browser now detects reserved/matchmade games whose main place is a 1-player launcher (like FLATS) instead of showing fake 1/1 servers, and Server Hop re-enters matchmaking via the main place
+
 ## v5.32.3
 - Settings: Server Browser now falls back to Asc / limit=50 / full-included queries and the game's root PlaceId (for sub-places) so it stops falsely saying 'No other servers found' when servers are listed on the website
 
