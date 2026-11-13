@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.32.3
+- Settings: Server Browser now falls back to Asc / limit=50 / full-included queries and the game's root PlaceId (for sub-places) so it stops falsely saying 'No other servers found' when servers are listed on the website
+
 ## v5.32.2
 - Settings: Server Browser now fetches 1 page at a time to stay under Roblox's 3-requests/min limit and caches the server list on disk (Understanding_servers.json) so reloads and rate limits keep your server list usable
 
