@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.32.5
+- Settings: Reverted the Server Browser back to the v5.32.1 behavior
+
 ## v5.32.4
 - Settings: Server Browser now detects reserved/matchmade games whose main place is a 1-player launcher (like FLATS) instead of showing fake 1/1 servers, and Server Hop re-enters matchmaking via the main place
 
