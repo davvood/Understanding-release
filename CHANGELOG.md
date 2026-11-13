@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.32.2
+- Settings: Server Browser now fetches 1 page at a time to stay under Roblox's 3-requests/min limit and caches the server list on disk (Understanding_servers.json) so reloads and rate limits keep your server list usable
+
 ## v5.32.1
 - Players: Spectate now works across the whole map like Freecam even when a player's character is streamed out, and no longer turns off or snaps back in games that reset the camera every half second
 
