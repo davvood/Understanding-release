@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.32.6
+- Menu: Higher-resolution (512x512) sidebar logo with a refreshed cache download
+- Keybinds: Mouse 3 (middle click), Mouse 4, and Mouse 5 (side mouse buttons) can now be bound everywhere as MB3, MB4, and MB5 (including Hold/Toggle modes, Menu Toggle/Panic keys, Teleports, Vehicle Jump, Automations, Keybind List, and saved configs)
+
 ## v5.32.5
 - Settings: Reverted the Server Browser back to the v5.32.1 behavior
 
