@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.32.10
+- Native iOS Remake: Rebuilt the menu as a crisp iPadOS split view with distinct iOS Dark & Light palettes, collapsible Large Titles, grouped inset cards with hairline dividers, tactile iOS switches and bounded sliders, an OLED Dynamic Island, a floating bottom tab bar, iOS banner notifications, and clean popover menus
+- Motion & Reliability: Replaced legacy tweens with a unified spring motion engine (Api.Spring), pooled overlay rows to avoid frame rebuilds, and fixed slider/overlay drag focus-loss, popup cleanup on hide, Light Theme contrast, and accent recolouring edge cases
+- Loader: Rebuilt the startup loader as a native iOS sheet with an app icon badge, capsule progress bar, readable multi-line errors, faster offline fallback, and clean blur handoff
+
 ## v5.32.9
 - Mac Glass Unification: Replaced multiple glass material presets with one unified translucent macOS frosted glass system across a seamless window shell, airy frosted section cards, and smoked floating popovers
 - Mac Layout & Controls: Moved Search to the top-left of content header, centered a compact Dynamic Island with quick Command Palette & Notification Center icons above clean unobstructed Traffic Lights, upgraded dropdown lists with right-side checkmarks, refined the Profile Popover with active footer glow, and updated the bottom Dock to circular frosted icon orbs
