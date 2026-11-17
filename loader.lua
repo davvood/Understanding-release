@@ -592,21 +592,33 @@ local function looksLikeMenu(src)
     return type(src) == "string" and #src > 1000 and src:find("UnderstandingDestroy", 1, true) ~= nil
 end
 
--- Single fast pass: API latest commit SHA -> pinned raw fetch -> raw/main cache-busted fetch
+-- Single fast pass: API latest commit SHA -> Atom feed fallback -> pinned raw fetch -> raw/main cache-busted fetch
+local LATEST_COMMIT_ATOM = "https://github.com/davvood/Understanding-release/commits/main.atom"
 local latestSha = nil -- commit the menu was downloaded from (lets the menu spot newer releases)
 local function downloadMenuOnce()
     local fresh = "?t=" .. tostring(os.time()) .. tostring(math.random(1000, 9999))
+    local sha = nil
     local apiBody = httpGet(LATEST_COMMIT_API .. fresh)
     if apiBody then
         local ok, data = pcall(function()
             return HttpService:JSONDecode(apiBody)
         end)
         if ok and type(data) == "table" and type(data.sha) == "string" and #data.sha == 40 then
-            latestSha = data.sha
-            local pinnedBody = httpGet(RAW .. data.sha .. "/UnderstandingMenu.lua")
-            if looksLikeMenu(pinnedBody) then
-                return pinnedBody, "GitHub"
-            end
+            sha = data.sha
+        end
+    end
+    if not sha then
+        local atomBody = httpGet(LATEST_COMMIT_ATOM .. fresh)
+        local atomSha = type(atomBody) == "string" and atomBody:match("<entry>.-Grit::Commit/(%x+)") or nil
+        if type(atomSha) == "string" and #atomSha == 40 then
+            sha = atomSha
+        end
+    end
+    if sha then
+        latestSha = sha
+        local pinnedBody = httpGet(RAW .. sha .. "/UnderstandingMenu.lua")
+        if looksLikeMenu(pinnedBody) then
+            return pinnedBody, "GitHub"
         end
     end
     latestSha = nil

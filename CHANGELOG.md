@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.33.1
+- Update Check & Loader Reliability: Added commits/main.atom and raw header fallbacks plus HTTP StatusCode validation so Check for Updates and loader SHA pinning keep working even when api.github.com returns 403 rate limit exceeded
+
 ## v5.33
 - macOS Shell & Appearance Overhaul: Moved window Traffic Lights to the top-left of the sidebar, grouped tabs under collapsible macOS sidebar headers, streamlined the Dynamic Island, added a toggleable Bottom Quick Dock, and rebuilt Appearance with a Live macOS Preview, 5 theme presets (macOS Dark/Light, Midnight, Graphite, Nord Slate), 3 window materials (Solid, Frosted, Liquid Glass), 10 Apple system accent swatches + gradient HSV sliders + #HEX input, and 10 macOS-inspired 3-weight UI fonts defaulting to SF Pro
 - Inside-Tab Layout & Reorganization: Fixed 50% orphan columns and hidden empty section headers, upgraded sliders/inputs/dropdowns/context menus, renamed Myself to Character, moved Give Jerk Tool to Trolling and Gravity + Remove Invisible Walls to World, added progressive showWhen disclosure across Visuals/World/Vehicle/Players/Automations, and polished Home, Players, Teleports, Emotes, Animations, Wardrobe, and Settings/Servers
