@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.32.8
+- Notifications: Remade toast cards in liquidDX11 glass (rounded app icon tile, category header, spring entrance, capsule timer bar) plus a Notification Center popover with All/Alerts filter, unread bell badge, and per-item dismiss
+- Overlays: Rebuilt Watermark and Speedometer as frosted glass HUD capsules with brand badges, translucent dividers, and live status dots; rebuilt Keybind List and Active Features List as cascading glass cards with 3D keycaps
+- Lists: Upgraded dropdown menus, Player List, Profile Card, Chat Log, Teleports, Wardrobe, Automations, Configs, Server Browser, Font Picker, Emotes, and Home cards with frosted list wells, rim lighting, and smooth hover/selection wash
+
 ## v5.32.7
 - Menu: Complete liquidDX11 Liquid Glass UI remake with frosted blur panels, diagonal specular rim highlights, and 5 glass material presets (Subtle, Default, Frost, Vivid, Deep) in Appearance
 - Chrome: Top-center Dynamic Island (expands on hover with latency & command hint), macOS Traffic Light window controls, sliding liquid-glass sidebar selection pill, bottom magnifying macOS dock, glass profile popover, and Ctrl+K Command Palette
