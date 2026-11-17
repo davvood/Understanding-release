@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.32.9
+- Mac Glass Unification: Replaced multiple glass material presets with one unified translucent macOS frosted glass system across a seamless window shell, airy frosted section cards, and smoked floating popovers
+- Mac Layout & Controls: Moved Search to the top-left of content header, centered a compact Dynamic Island with quick Command Palette & Notification Center icons above clean unobstructed Traffic Lights, upgraded dropdown lists with right-side checkmarks, refined the Profile Popover with active footer glow, and updated the bottom Dock to circular frosted icon orbs
+
 ## v5.32.8
 - Notifications: Remade toast cards in liquidDX11 glass (rounded app icon tile, category header, spring entrance, capsule timer bar) plus a Notification Center popover with All/Alerts filter, unread bell badge, and per-item dismiss
 - Overlays: Rebuilt Watermark and Speedometer as frosted glass HUD capsules with brand badges, translucent dividers, and live status dots; rebuilt Keybind List and Active Features List as cascading glass cards with 3D keycaps
