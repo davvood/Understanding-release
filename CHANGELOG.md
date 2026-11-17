@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.32.7
+- Menu: Complete liquidDX11 Liquid Glass UI remake with frosted blur panels, diagonal specular rim highlights, and 5 glass material presets (Subtle, Default, Frost, Vivid, Deep) in Appearance
+- Chrome: Top-center Dynamic Island (expands on hover with latency & command hint), macOS Traffic Light window controls, sliding liquid-glass sidebar selection pill, bottom magnifying macOS dock, glass profile popover, and Ctrl+K Command Palette
+- Widgets: Spring-animated pill switches with liquid velocity stretch, bouncy knob sliders, and click-ripple glass buttons
+
 ## v5.32.6
 - Menu: Higher-resolution (512x512) sidebar logo with a refreshed cache download
 - Keybinds: Mouse 3 (middle click), Mouse 4, and Mouse 5 (side mouse buttons) can now be bound everywhere as MB3, MB4, and MB5 (including Hold/Toggle modes, Menu Toggle/Panic keys, Teleports, Vehicle Jump, Automations, Keybind List, and saved configs)
