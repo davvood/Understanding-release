@@ -34,17 +34,20 @@ end
 local lp = Players.LocalPlayer
 local playerGui = lp:WaitForChild("PlayerGui")
 
--- ── Native iOS Sheet Palette ─────────────────────────────
+-- ── macOS Sheet Palette ──────────────────────────────────
 local COL = {
-    surface = Color3.fromRGB(28, 28, 30), -- #1C1C1E
-    well = Color3.fromRGB(44, 44, 46), -- #2C2C2E
-    track = Color3.fromRGB(48, 48, 52), -- #303034
-    border = Color3.fromRGB(60, 60, 66), -- #3C3C42
-    accent = Color3.fromRGB(108, 82, 230), -- #6C52E6
+    surface = Color3.fromRGB(24, 24, 28), -- #18181C
+    well = Color3.fromRGB(38, 38, 44), -- #26262C
+    track = Color3.fromRGB(46, 46, 52), -- #2E2E34
+    border = Color3.fromRGB(62, 62, 70), -- #3E3E46
+    accent = Color3.fromRGB(10, 132, 255), -- macOS Blue #0A84FF
     green = Color3.fromRGB(48, 209, 88), -- #30D158
     red = Color3.fromRGB(255, 69, 58), -- #FF453A
     txt = Color3.fromRGB(246, 246, 250),
-    dim = Color3.fromRGB(142, 142, 147), -- #8E8E93
+    dim = Color3.fromRGB(152, 152, 160), -- #9898A0
+    tlRed = Color3.fromRGB(255, 95, 86), -- #FF5F56
+    tlYellow = Color3.fromRGB(255, 189, 46), -- #FFBD2E
+    tlGreen = Color3.fromRGB(39, 201, 63), -- #27C93F
 }
 
 -- ── Tracked Tween Manager ────────────────────────────────
@@ -198,7 +201,7 @@ local function resolveLogoAsset(file)
     return nil
 end
 
--- ── iOS Loader Sheet UI ──────────────────────────────────
+-- ── macOS Loader Sheet UI ────────────────────────────────
 local uiToken = 0
 local blurFx = nil
 local gui, scrim, card, cardStroke, scale = nil, nil, nil, nil, nil
@@ -240,13 +243,13 @@ local function createUi()
     card = Instance.new("Frame")
     card.AnchorPoint = Vector2.new(0.5, 0.5)
     card.Position = UDim2.fromScale(0.5, 0.5)
-    card.Size = UDim2.fromOffset(320, 138)
+    card.Size = UDim2.fromOffset(340, 160)
     card.BackgroundColor3 = COL.surface
     card.BackgroundTransparency = 1
     card.BorderSizePixel = 0
     card.ZIndex = 2
     card.Parent = gui
-    round(22, card)
+    round(18, card)
 
     cardStroke = Instance.new("UIStroke")
     cardStroke.Color = COL.border
@@ -264,8 +267,36 @@ local function createUi()
         { cardStroke, "Transparency", 0 },
     }
 
+    -- Top-left macOS traffic light dots + subtle titlebar hairline
+    for idx, dotCol in ipairs({ COL.tlRed, COL.tlYellow, COL.tlGreen }) do
+        local dot = Instance.new("Frame")
+        dot.Position = UDim2.fromOffset(14 + (idx - 1) * 16, 11)
+        dot.Size = UDim2.fromOffset(10, 10)
+        dot.BackgroundColor3 = dotCol
+        dot.BackgroundTransparency = 1
+        dot.BorderSizePixel = 0
+        dot.Parent = card
+        round(0, dot, 0.5)
+        table.insert(fadeTargets, { dot, "BackgroundTransparency", 0 })
+        local dotRim = Instance.new("UIStroke")
+        dotRim.Color = Color3.new(0, 0, 0)
+        dotRim.Thickness = 1
+        dotRim.Transparency = 1
+        dotRim.Parent = dot
+        table.insert(fadeTargets, { dotRim, "Transparency", 0.72 })
+    end
+
+    local barSep = Instance.new("Frame")
+    barSep.Position = UDim2.fromOffset(0, 32)
+    barSep.Size = UDim2.new(1, 0, 0, 1)
+    barSep.BackgroundColor3 = COL.border
+    barSep.BackgroundTransparency = 1
+    barSep.BorderSizePixel = 0
+    barSep.Parent = card
+    table.insert(fadeTargets, { barSep, "BackgroundTransparency", 0.65 })
+
     local badge = Instance.new("Frame")
-    badge.Position = UDim2.fromOffset(18, 18)
+    badge.Position = UDim2.fromOffset(18, 44)
     badge.Size = UDim2.fromOffset(40, 40)
     badge.BackgroundColor3 = COL.accent
     badge.BackgroundTransparency = 1
@@ -288,7 +319,7 @@ local function createUi()
         local badgeLbl = Instance.new("TextLabel")
         badgeLbl.Size = UDim2.fromScale(1, 1)
         badgeLbl.BackgroundTransparency = 1
-        badgeLbl.Font = Enum.Font.GothamBold
+        badgeLbl.Font = Enum.Font.BuilderSansBold
         badgeLbl.TextSize = 18
         badgeLbl.TextColor3 = Color3.new(1, 1, 1)
         badgeLbl.TextTransparency = 1
@@ -315,12 +346,12 @@ local function createUi()
         return l
     end
 
-    makeLabel("Understanding", 15, Enum.Font.GothamBold, COL.txt, 70, 19, 174, 20)
-    subLbl = makeLabel("Preparing...", 12, Enum.Font.GothamMedium, COL.dim, 70, 39, 174, 16)
+    makeLabel("Understanding", 15, Enum.Font.BuilderSansBold, COL.txt, 70, 45, 186, 20)
+    subLbl = makeLabel("Preparing...", 12, Enum.Font.BuilderSansMedium, COL.dim, 70, 65, 186, 16)
 
     local pctPill = Instance.new("Frame")
     pctPill.AnchorPoint = Vector2.new(1, 0)
-    pctPill.Position = UDim2.new(1, -18, 0, 27)
+    pctPill.Position = UDim2.new(1, -18, 0, 53)
     pctPill.Size = UDim2.fromOffset(48, 22)
     pctPill.BackgroundColor3 = COL.well
     pctPill.BackgroundTransparency = 1
@@ -339,7 +370,7 @@ local function createUi()
     pctLbl = Instance.new("TextLabel")
     pctLbl.Size = UDim2.fromScale(1, 1)
     pctLbl.BackgroundTransparency = 1
-    pctLbl.Font = Enum.Font.GothamMedium
+    pctLbl.Font = Enum.Font.BuilderSansMedium
     pctLbl.TextSize = 11
     pctLbl.TextColor3 = COL.dim
     pctLbl.TextTransparency = 1
@@ -350,9 +381,9 @@ local function createUi()
 
     status = Instance.new("TextLabel")
     status.BackgroundTransparency = 1
-    status.Position = UDim2.fromOffset(18, 70)
-    status.Size = UDim2.fromOffset(284, 34)
-    status.Font = Enum.Font.Gotham
+    status.Position = UDim2.fromOffset(18, 96)
+    status.Size = UDim2.fromOffset(304, 34)
+    status.Font = Enum.Font.BuilderSans
     status.TextSize = 12
     status.TextColor3 = COL.dim
     status.TextTransparency = 1
@@ -365,7 +396,7 @@ local function createUi()
     table.insert(fadeTargets, { status, "TextTransparency", 0 })
 
     local track = Instance.new("Frame")
-    track.Position = UDim2.new(0, 18, 1, -22)
+    track.Position = UDim2.new(0, 18, 1, -20)
     track.Size = UDim2.new(1, -36, 0, 4)
     track.BackgroundColor3 = COL.track
     track.BackgroundTransparency = 1
@@ -489,14 +520,14 @@ end
 local function measureStatusHeight(msg)
     local h = 0
     local ok, bounds = pcall(function()
-        return TextService:GetTextSize(msg, 12, Enum.Font.Gotham, Vector2.new(284, 360))
+        return TextService:GetTextSize(msg, 12, Enum.Font.BuilderSans, Vector2.new(304, 360))
     end)
     if ok and bounds and bounds.Y > 0 then
         h = math.ceil(bounds.Y) + 4
     else
         local lines = 0
         for line in (msg .. "\n"):gmatch("([^\n]*)\n") do
-            lines += math.max(1, math.ceil(#line / 42))
+            lines += math.max(1, math.ceil(#line / 44))
         end
         h = lines * 16 + 4
     end
@@ -507,9 +538,9 @@ local function fail(msg)
     ensureUi()
     local errText = tostring(msg)
     local textH = measureStatusHeight(errText)
-    local cardH = math.max(138, 70 + textH + 34)
+    local cardH = math.max(160, 96 + textH + 34)
     status.TextColor3 = COL.red
-    status.Size = UDim2.fromOffset(284, textH)
+    status.Size = UDim2.fromOffset(304, textH)
     if textH >= 240 then
         status.TextTruncate = Enum.TextTruncate.AtEnd
     else
@@ -517,7 +548,10 @@ local function fail(msg)
     end
     pctLbl.TextColor3 = COL.red
     fill.BackgroundColor3 = COL.red
-    tween(card, 0.22, { Size = UDim2.fromOffset(320, cardH) })
+    if cardStroke then
+        tween(cardStroke, 0.22, { Color = COL.red, Transparency = 0.45 })
+    end
+    tween(card, 0.22, { Size = UDim2.fromOffset(340, cardH) })
     step(errText, 1, "Failed to start")
     warn("[Understanding loader] " .. errText)
     close(6)

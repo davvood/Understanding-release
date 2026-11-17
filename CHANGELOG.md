@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.33
+- macOS Shell & Appearance Overhaul: Moved window Traffic Lights to the top-left of the sidebar, grouped tabs under collapsible macOS sidebar headers, streamlined the Dynamic Island, added a toggleable Bottom Quick Dock, and rebuilt Appearance with a Live macOS Preview, 5 theme presets (macOS Dark/Light, Midnight, Graphite, Nord Slate), 3 window materials (Solid, Frosted, Liquid Glass), 10 Apple system accent swatches + gradient HSV sliders + #HEX input, and 10 macOS-inspired 3-weight UI fonts defaulting to SF Pro
+- Inside-Tab Layout & Reorganization: Fixed 50% orphan columns and hidden empty section headers, upgraded sliders/inputs/dropdowns/context menus, renamed Myself to Character, moved Give Jerk Tool to Trolling and Gravity + Remove Invisible Walls to World, added progressive showWhen disclosure across Visuals/World/Vehicle/Players/Automations, and polished Home, Players, Teleports, Emotes, Animations, Wardrobe, and Settings/Servers
+- Mouse 4 & 5 Side Buttons: Normalized numeric/boolean executor iskeypressed and isrbxactive checks, added self-healing window-focus recovery so faulty isrbxactive implementations cannot block MB4/MB5 polling, reconciled input/poll state, made key alias parsing case-insensitive, and ensured failed captures cancel cleanly on hide, tab switch, or unload
+
 ## v5.32.10
 - Native iOS Remake: Rebuilt the menu as a crisp iPadOS split view with distinct iOS Dark & Light palettes, collapsible Large Titles, grouped inset cards with hairline dividers, tactile iOS switches and bounded sliders, an OLED Dynamic Island, a floating bottom tab bar, iOS banner notifications, and clean popover menus
 - Motion & Reliability: Replaced legacy tweens with a unified spring motion engine (Api.Spring), pooled overlay rows to avoid frame rebuilds, and fixed slider/overlay drag focus-loss, popup cleanup on hide, Light Theme contrast, and accent recolouring edge cases
