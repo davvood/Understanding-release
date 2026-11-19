@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.33.2
+- Stability & Leak Hardening: Hardened unload teardown to clear all active registries, listeners, blur effects, and pending async tasks cleanly without post-unload errors or connection/instance leaks
+- Loops & UI Performance: Converted idle background polling loops across ESP, Visuals, World, Players, Vehicle, Emotes, Wardrobe, Automations, Overlays, and MB4/MB5 tracking into on-demand event-driven hooks, debounced layout and Notification Center updates, and fixed camera/viewport resize handling
+- Gameplay, Visuals & Config Bug Fixes: Fixed state restoration across World shadows/sounds, Visuals zoom/Freecam/X-Ray, Character JumpPower/Noclip/Godmode/Anti-Fling, Vehicle hooks, Players Spectate, Appearance HSV picker and startup save churn, Home IPv4 validation, and Config reset/autoload reliability
+- Luau Headroom, Loader & Updater Reliability: Reclaimed Luau local variable headroom across the main chunk and tab modules, hardened HTTP 2xx validation and What's New overflow scrolling with fallback cooldowns, and tightened navigation and spring animation edge cases
+
 ## v5.33.1
 - Update Check & Loader Reliability: Added commits/main.atom and raw header fallbacks plus HTTP StatusCode validation so Check for Updates and loader SHA pinning keep working even when api.github.com returns 403 rate limit exceeded
 

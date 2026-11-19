@@ -178,7 +178,11 @@ local function cleanupOrphans()
 end
 
 local function resolveLogoAsset(file)
-    if not (isfile and isfile(file)) then
+    if not isfile then
+        return nil
+    end
+    local okF, exists = pcall(isfile, file)
+    if not (okF and exists) then
         return nil
     end
     local loaders = {}
@@ -462,13 +466,6 @@ local function teardownUi()
         pcall(blurFx.Destroy, blurFx)
         blurFx = nil
     end
-    pcall(function()
-        for _, child in ipairs(Lighting:GetChildren()) do
-            if child.Name == "UnderstandingLoaderBlur" then
-                child:Destroy()
-            end
-        end
-    end)
     if gui then
         pcall(gui.Destroy, gui)
         gui = nil
@@ -505,12 +502,12 @@ end
 local function close(delay)
     local token = uiToken
     task.delay(delay or 0, function()
-        if token ~= uiToken then
+        if token ~= uiToken or not gui or not gui.Parent then
             return
         end
         fadeOutUi(0.20)
         task.delay(0.24, function()
-            if token == uiToken then
+            if token == uiToken and gui and gui.Parent then
                 teardownUi()
             end
         end)
@@ -560,30 +557,34 @@ end
 createUi()
 
 -- ── Download ─────────────────────────────────────────────
--- game:HttpGet first, then the executor's request() if HttpGet is missing or fails
+-- request() with 2xx status check first, then game:HttpGet if request() is missing or unavailable
 local function httpGet(url)
-    -- selene: allow(incorrect_standard_library_use) -- HttpGet is added by the executor
-    local ok, body = pcall(function()
-        return game:HttpGet(url, true)
-    end)
-    if ok and type(body) == "string" and body ~= "" then
-        return body
-    end
     local req = (syn and syn.request) or (http and http.request) or http_request or request
     if req then
-        local ok2, res = pcall(req, { Url = url, Method = "GET" })
-        if ok2 and type(res) == "table" and type(res.Body) == "string" and res.Body ~= "" then
-            local statusOk = (res.StatusCode == nil and res.Success == true)
-                or (
-                    type(res.StatusCode) == "number"
-                    and res.StatusCode >= 200
+        local ok, res = pcall(req, { Url = url, Method = "GET" })
+        if ok and type(res) == "table" then
+            if type(res.StatusCode) == "number" and res.StatusCode > 0 then
+                if
+                    res.StatusCode >= 200
                     and res.StatusCode < 300
                     and res.Success ~= false
-                )
-            if statusOk then
+                    and type(res.Body) == "string"
+                    and res.Body ~= ""
+                then
+                    return res.Body
+                end
+                return nil
+            elseif res.StatusCode == nil and res.Success == true and type(res.Body) == "string" and res.Body ~= "" then
                 return res.Body
             end
         end
+    end
+    -- selene: allow(incorrect_standard_library_use) -- HttpGet is added by the executor
+    local ok2, body = pcall(function()
+        return game:HttpGet(url, true)
+    end)
+    if ok2 and type(body) == "string" and body ~= "" then
+        return body
     end
     return nil
 end
