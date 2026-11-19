@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.33.3
+- Card Divider & Layout Fixes: Fixed Appearance accent swatch row clipping and divider alignment across Home (What's New), Animations, Automations, and Players, with a defensive layout guard so row dividers never collide with child layouts or padding
+- Scaling, Dropdown & Modal Polish: Fixed dropdown checkmark overlap, Menu Scale label width math and slider value overlap, modal card button ordering and Escape priority, and row spacing across Teleports, Appearance, Emotes, and Overlays
+- Light Theme Contrast & Reliability: Fixed Notification Center empty bell contrast in Light themes, gave the ESP Preview a dark stage with font-aware label sizing, fixed Fly respawn persistence, added MB4/MB5 isrbxactive capture self-healing, and kept Active Features chips synced with material changes
+
 ## v5.33.2
 - Stability & Leak Hardening: Hardened unload teardown to clear all active registries, listeners, blur effects, and pending async tasks cleanly without post-unload errors or connection/instance leaks
 - Loops & UI Performance: Converted idle background polling loops across ESP, Visuals, World, Players, Vehicle, Emotes, Wardrobe, Automations, Overlays, and MB4/MB5 tracking into on-demand event-driven hooks, debounced layout and Notification Center updates, and fixed camera/viewport resize handling
