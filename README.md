@@ -5,7 +5,7 @@
 An all-in-one Roblox menu that works in every game. One window, a search box that finds any
 feature, and it updates itself.
 
-**Discord:** https://discord.gg/h4R9W7gT2H (updates, help and bug reports)
+**Discord:** https://discord.gg/8M9FQzayk2 (updates, help and bug reports)
 
 ## Run it
 

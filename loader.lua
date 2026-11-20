@@ -11,6 +11,9 @@ local RAW = "https://raw.githubusercontent.com/davvood/Understanding-release/"
 local BASE = RAW .. "refs/heads/main/"
 local MENU_URL = BASE .. "UnderstandingMenu.lua"
 local LOADER_URL = BASE .. "loader.lua"
+local DISCORD_INVITE = "https://discord.gg/8M9FQzayk2"
+local DISCORD_INVITE_CODE = "8M9FQzayk2"
+local VERIFY_URL = "https://understanding-verify.understanding-menu.workers.dev" -- set to the deployed Cloudflare Worker URL to enable Discord membership verification
 -- Branch links are cached by GitHub for up to 5 minutes after a publish; links pinned to a
 -- commit are always exact. This API call says which commit is newest. Its answer may be cached
 -- for a minute (also by Roblox itself, which is why a reload right after a release used to give
@@ -38,9 +41,11 @@ local playerGui = lp:WaitForChild("PlayerGui")
 local COL = {
     surface = Color3.fromRGB(24, 24, 28), -- #18181C
     well = Color3.fromRGB(38, 38, 44), -- #26262C
+    wellHover = Color3.fromRGB(50, 50, 58), -- #32323A
     track = Color3.fromRGB(46, 46, 52), -- #2E2E34
     border = Color3.fromRGB(62, 62, 70), -- #3E3E46
     accent = Color3.fromRGB(10, 132, 255), -- macOS Blue #0A84FF
+    accentHover = Color3.fromRGB(34, 148, 255),
     green = Color3.fromRGB(48, 209, 88), -- #30D158
     red = Color3.fromRGB(255, 69, 58), -- #FF453A
     txt = Color3.fromRGB(246, 246, 250),
@@ -446,7 +451,9 @@ local function fadeOutUi(dur)
             tween(scale, dur, { Scale = 0.94 }, Enum.EasingStyle.Quad)
         end
         for _, o in ipairs(card:GetDescendants()) do
-            if o:IsA("TextLabel") then
+            if o:IsA("TextButton") then
+                tween(o, dur * 0.9, { BackgroundTransparency = 1, TextTransparency = 1 }, Enum.EasingStyle.Quad)
+            elseif o:IsA("TextLabel") then
                 tween(o, dur * 0.9, { TextTransparency = 1 }, Enum.EasingStyle.Quad)
             elseif o:IsA("ImageLabel") then
                 tween(o, dur * 0.9, { ImageTransparency = 1 }, Enum.EasingStyle.Quad)
@@ -647,6 +654,346 @@ local function readOfflineFallback()
         return localCopy, "workspace copy (GitHub unreachable)"
     end
     return nil, nil
+end
+
+-- ── Discord Membership Verification ──────────────────────
+local function verifyDiscordMembership()
+    if type(VERIFY_URL) ~= "string" or VERIFY_URL == "" then
+        return true
+    end
+
+    local verifyBase = VERIFY_URL:gsub("/+$", "")
+    local function queryDiscord()
+        local body = httpGet(verifyBase .. "/check?userId=" .. tostring(lp.UserId))
+        if not body then
+            return false, "network"
+        end
+        local okJson, res = pcall(HttpService.JSONDecode, HttpService, body)
+        if not okJson or type(res) ~= "table" or type(res.inDiscord) ~= "boolean" then
+            return false, "network"
+        end
+        if res.inDiscord then
+            return true, nil
+        end
+        local reason = type(res.reason) == "string" and res.reason ~= "" and res.reason or "not_linked"
+        return false, reason
+    end
+
+    local function tryDiscordRpcInvite()
+        local req = (syn and syn.request) or (http and http.request) or http_request or request
+        if not req or DISCORD_INVITE_CODE == "" then
+            return
+        end
+        task.spawn(function()
+            pcall(function()
+                local nonce = tostring(os.time()) .. "-" .. tostring(math.random(10000, 99999))
+                local okGuid, guid = pcall(HttpService.GenerateGUID, HttpService, false)
+                if okGuid and type(guid) == "string" and guid ~= "" then
+                    nonce = guid
+                end
+                req({
+                    Url = "http://127.0.0.1:6463/rpc?v=1",
+                    Method = "POST",
+                    Headers = {
+                        ["Content-Type"] = "application/json",
+                        ["Origin"] = "https://discord.com",
+                    },
+                    Body = HttpService:JSONEncode({
+                        cmd = "INVITE_BROWSER",
+                        nonce = nonce,
+                        args = { code = DISCORD_INVITE_CODE },
+                    }),
+                })
+            end)
+        end)
+    end
+
+    step("Checking Discord membership...", 0.12, "Discord")
+    local verified, reason = queryDiscord()
+    if verified then
+        return true
+    end
+
+    ensureUi()
+    local rpcSent = false
+    if reason ~= "network" then
+        rpcSent = true
+        tryDiscordRpcInvite()
+    end
+
+    local doneEvent = Instance.new("BindableEvent")
+    local outcome = nil
+    local function finish(res)
+        if outcome ~= nil then
+            return
+        end
+        outcome = res
+        doneEvent:Fire()
+    end
+
+    local guardConns = {}
+    if gui then
+        pcall(function()
+            table.insert(
+                guardConns,
+                gui.AncestryChanged:Connect(function()
+                    if not gui or not gui.Parent then
+                        finish("closed")
+                    end
+                end)
+            )
+        end)
+    end
+
+    local actionBar = nil
+    local btnConns = {}
+    local primaryBtn = nil
+    local currentMode = nil
+    local checking = false
+    local copyToken = 0
+
+    local function clearActions()
+        for _, c in ipairs(btnConns) do
+            pcall(c.Disconnect, c)
+        end
+        table.clear(btnConns)
+        if actionBar then
+            pcall(actionBar.Destroy, actionBar)
+            actionBar = nil
+        end
+        primaryBtn = nil
+        currentMode = nil
+    end
+
+    local function makeActionButton(parent, x, w, label, styleKind, onClick)
+        local isPrimary = styleKind == "primary"
+        local baseBg = isPrimary and COL.accent or COL.well
+        local hoverBg = isPrimary and COL.accentHover or COL.wellHover
+        local txtCol = isPrimary and Color3.new(1, 1, 1) or (styleKind == "close" and COL.dim or COL.txt)
+
+        local btn = Instance.new("TextButton")
+        btn.AutoButtonColor = false
+        btn.Position = UDim2.fromOffset(x, 0)
+        btn.Size = UDim2.fromOffset(w, 30)
+        btn.BackgroundColor3 = baseBg
+        btn.BackgroundTransparency = 1
+        btn.BorderSizePixel = 0
+        btn.Font = isPrimary and Enum.Font.BuilderSansBold or Enum.Font.BuilderSansMedium
+        btn.TextSize = 12
+        btn.TextColor3 = txtCol
+        btn.TextTransparency = 1
+        btn.Text = label
+        btn.TextTruncate = Enum.TextTruncate.AtEnd
+        btn.Parent = parent
+        round(8, btn)
+
+        if not isPrimary then
+            local rim = Instance.new("UIStroke")
+            rim.Color = COL.border
+            rim.Thickness = 1
+            rim.Transparency = 1
+            rim.Parent = btn
+            tween(rim, 0.18, { Transparency = styleKind == "close" and 0.45 or 0.35 }, Enum.EasingStyle.Quad)
+        end
+
+        tween(btn, 0.18, { BackgroundTransparency = 0, TextTransparency = 0 }, Enum.EasingStyle.Quad)
+
+        table.insert(
+            btnConns,
+            btn.MouseEnter:Connect(function()
+                if btn.Active and outcome == nil then
+                    tween(btn, 0.12, { BackgroundColor3 = hoverBg }, Enum.EasingStyle.Quad)
+                    if styleKind == "close" then
+                        tween(btn, 0.12, { TextColor3 = COL.txt }, Enum.EasingStyle.Quad)
+                    end
+                end
+            end)
+        )
+        table.insert(
+            btnConns,
+            btn.MouseLeave:Connect(function()
+                if outcome == nil then
+                    tween(btn, 0.14, { BackgroundColor3 = baseBg }, Enum.EasingStyle.Quad)
+                    if styleKind == "close" then
+                        tween(btn, 0.14, { TextColor3 = txtCol }, Enum.EasingStyle.Quad)
+                    end
+                end
+            end)
+        )
+        table.insert(
+            btnConns,
+            btn.MouseButton1Click:Connect(function()
+                if btn.Active and outcome == nil then
+                    onClick(btn)
+                end
+            end)
+        )
+        return btn
+    end
+
+    local renderState
+    local function runRecheck()
+        if checking or outcome ~= nil then
+            return
+        end
+        checking = true
+        if primaryBtn and primaryBtn.Parent then
+            primaryBtn.Active = false
+            primaryBtn.Text = "Checking..."
+            tween(primaryBtn, 0.12, { BackgroundTransparency = 0.45 }, Enum.EasingStyle.Quad)
+        end
+        if subLbl then
+            subLbl.Text = "Checking..."
+        end
+        task.spawn(function()
+            local okNow, nextReason = queryDiscord()
+            if outcome ~= nil or not gui or not gui.Parent then
+                return
+            end
+            if okNow then
+                finish("verified")
+                return
+            end
+            if nextReason ~= "network" and not rpcSent then
+                rpcSent = true
+                tryDiscordRpcInvite()
+            end
+            checking = false
+            local reused = renderState(nextReason, nextReason == "network" and "Connection Error" or "Not verified yet")
+            if reused and primaryBtn and primaryBtn.Parent then
+                primaryBtn.Active = true
+                primaryBtn.Text = nextReason == "network" and "Retry" or "Check Again"
+                tween(primaryBtn, 0.14, { BackgroundTransparency = 0 }, Enum.EasingStyle.Quad)
+            end
+        end)
+    end
+
+    renderState = function(stateReason, subOverride)
+        local isError = stateReason == "network"
+        local msg
+        if isError then
+            msg =
+                "Couldn't reach the verification server.\nCheck your connection or executor permissions, then click Retry."
+        elseif stateReason == "not_in_server" then
+            msg = "You aren't in the Understanding Discord server.\nRejoin, then click Check Again."
+        else
+            msg = "Join the Understanding Discord server and run:\n/verify " .. lp.Name .. "\nthen click Check Again."
+        end
+
+        local textH = measureStatusHeight(msg)
+        local btnY = 96 + textH + 10
+        local cardH = math.max(196, btnY + 30 + 30)
+
+        status.Size = UDim2.fromOffset(304, textH)
+        status.TextTruncate = textH >= 240 and Enum.TextTruncate.AtEnd or Enum.TextTruncate.None
+        if isError then
+            status.TextColor3 = COL.red
+            pctLbl.TextColor3 = COL.red
+            fill.BackgroundColor3 = COL.red
+            if cardStroke then
+                tween(cardStroke, 0.22, { Color = COL.red, Transparency = 0.45 })
+            end
+            step(msg, 0.12, subOverride or "Connection Error")
+        else
+            status.TextColor3 = COL.txt
+            pctLbl.TextColor3 = COL.accent
+            fill.BackgroundColor3 = COL.accent
+            if cardStroke then
+                tween(cardStroke, 0.22, { Color = COL.border, Transparency = 0 })
+            end
+            step(msg, 0.12, subOverride or "Discord Required")
+        end
+
+        tween(card, 0.22, { Size = UDim2.fromOffset(340, cardH) })
+
+        local targetMode = isError and "error" or "verify"
+        if actionBar and actionBar.Parent and currentMode == targetMode then
+            tween(actionBar, 0.22, { Position = UDim2.fromOffset(18, btnY) })
+            return true
+        end
+
+        clearActions()
+        currentMode = targetMode
+        actionBar = Instance.new("Frame")
+        actionBar.Name = "VerifyActions"
+        actionBar.Position = UDim2.fromOffset(18, btnY)
+        actionBar.Size = UDim2.fromOffset(304, 30)
+        actionBar.BackgroundTransparency = 1
+        actionBar.BorderSizePixel = 0
+        actionBar.Parent = card
+
+        if isError then
+            primaryBtn = makeActionButton(actionBar, 0, 148, "Retry", "primary", runRecheck)
+            makeActionButton(actionBar, 156, 148, "Close", "close", function()
+                finish("closed")
+            end)
+        else
+            makeActionButton(actionBar, 0, 100, "Copy Invite", "secondary", function(copyBtn)
+                copyToken += 1
+                local tok = copyToken
+                local copied = setclipboard and pcall(setclipboard, DISCORD_INVITE)
+                copyBtn.Text = copied and "Copied!" or "Unavailable"
+                task.delay(1.6, function()
+                    if tok == copyToken and copyBtn.Parent and outcome == nil then
+                        copyBtn.Text = "Copy Invite"
+                    end
+                end)
+            end)
+            primaryBtn = makeActionButton(actionBar, 108, 114, "Check Again", "primary", runRecheck)
+            makeActionButton(actionBar, 230, 74, "Close", "close", function()
+                finish("closed")
+            end)
+        end
+        return false
+    end
+
+    renderState(reason, nil)
+
+    while outcome == nil do
+        if not gui or not gui.Parent then
+            outcome = "closed"
+            break
+        end
+        doneEvent.Event:Wait()
+    end
+
+    for _, c in ipairs(guardConns) do
+        pcall(c.Disconnect, c)
+    end
+    pcall(doneEvent.Destroy, doneEvent)
+
+    if outcome ~= "verified" then
+        for _, c in ipairs(btnConns) do
+            pcall(c.Disconnect, c)
+        end
+        table.clear(btnConns)
+        close(0)
+        return false
+    end
+
+    clearActions()
+    if status then
+        status.TextColor3 = COL.dim
+        status.Size = UDim2.fromOffset(304, 34)
+        status.TextTruncate = Enum.TextTruncate.None
+    end
+    if pctLbl then
+        pctLbl.TextColor3 = COL.dim
+    end
+    if fill then
+        fill.BackgroundColor3 = COL.accent
+    end
+    if cardStroke then
+        tween(cardStroke, 0.22, { Color = COL.border, Transparency = 0 })
+    end
+    if card then
+        tween(card, 0.22, { Size = UDim2.fromOffset(340, 160) })
+    end
+    return true
+end
+
+if not verifyDiscordMembership() then
+    return
 end
 
 step("Downloading menu...", 0.25, "GitHub")
