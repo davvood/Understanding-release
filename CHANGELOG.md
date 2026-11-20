@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.34.1
+- Character Fly Controls: Removed Q and E vertical movement bindings from Fly so those keys stay free for in-game interactions (Space/LeftShift and camera look still move up and down)
+
 ## v5.34
 - Earmuff Mode (World → Sound): Added VRChat-style Earmuff Mode with a live resizable 3D ground hearing circle (Earmuff Radius 4–120 st, Show Earmuff Circle, custom Earmuff Circle Color), Outside Volume (0% full mute to 100% soft muffle), Mute Game Audio Outside, and optional Mute Global Music
 - Voice Chat & Audio Engine: Gates both legacy Roblox Voice Chat (VoiceChatInternal, preserving players you manually muted) and modern Audio API voices (AudioDeviceInput), plus 3D positional Sound/AudioPlayer sources with edge hysteresis, Loud Sound Limiter coordination, and full automatic restoration on toggle-off or unload
