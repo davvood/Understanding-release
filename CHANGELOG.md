@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.34.3
+- Worker-Gated Delivery & Blacklist Support: Menu downloads now go through the verification server with real-time blacklist enforcement and faster update checks
+
 ## v5.34.2
 - Discord Verification & Invite Update: Updated the Discord invite link, added live Discord server membership verification to the loader (with Copy Invite and Check Again buttons), and refined Earmuff Mode descriptions
 

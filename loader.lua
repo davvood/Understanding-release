@@ -2,25 +2,14 @@
     Understanding  loader
     loadstring(game:HttpGet("https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/loader.lua"))()
 
-    Downloads the latest UnderstandingMenu.lua from GitHub and runs it, with a native iOS loading sheet.
-    If GitHub can't be reached it uses the last downloaded copy (Understanding_cache.lua), then a
-    copy you put in the executor workspace yourself (UnderstandingMenu.lua).
+    Verifies Discord membership and downloads the latest UnderstandingMenu.lua from the
+    Understanding verification worker, with a native macOS/iOS loading sheet.
 ]]
 
-local RAW = "https://raw.githubusercontent.com/davvood/Understanding-release/"
-local BASE = RAW .. "refs/heads/main/"
-local MENU_URL = BASE .. "UnderstandingMenu.lua"
-local LOADER_URL = BASE .. "loader.lua"
+local LOADER_URL = "https://raw.githubusercontent.com/davvood/Understanding-release/refs/heads/main/loader.lua"
 local DISCORD_INVITE = "https://discord.gg/h4R9W7gT2H"
 local DISCORD_INVITE_CODE = "h4R9W7gT2H"
-local VERIFY_URL = "https://understanding-verify.understanding-menu.workers.dev" -- set to the deployed Cloudflare Worker URL to enable Discord membership verification
--- Branch links are cached by GitHub for up to 5 minutes after a publish; links pinned to a
--- commit are always exact. This API call says which commit is newest. Its answer may be cached
--- for a minute (also by Roblox itself, which is why a reload right after a release used to give
--- the old version), so every request gets a different "?t=" ending: nothing can answer it from a cache.
-local LATEST_COMMIT_API = "https://api.github.com/repos/davvood/Understanding-release/commits/main"
-local CACHE_FILE = "Understanding_cache.lua"
-local LOCAL_FILE = "UnderstandingMenu.lua"
+local VERIFY_URL = "https://understanding-verify.understanding-menu.workers.dev" -- Cloudflare Worker URL for Discord verification & gated menu delivery
 
 -- After a teleport this runs as soon as the new server starts: wait until the game has loaded
 if not game:IsLoaded() then
@@ -565,7 +554,7 @@ createUi()
 
 -- ── Download ─────────────────────────────────────────────
 -- request() with 2xx status check first, then game:HttpGet if request() is missing or unavailable
-local function httpGet(url)
+local function httpGet(url, allowErrorBody)
     local req = (syn and syn.request) or (http and http.request) or http_request or request
     if req then
         local ok, res = pcall(req, { Url = url, Method = "GET" })
@@ -578,11 +567,14 @@ local function httpGet(url)
                     and type(res.Body) == "string"
                     and res.Body ~= ""
                 then
-                    return res.Body
+                    return res.Body, res.StatusCode
                 end
-                return nil
+                if allowErrorBody and type(res.Body) == "string" and res.Body ~= "" then
+                    return res.Body, res.StatusCode
+                end
+                return nil, res.StatusCode
             elseif res.StatusCode == nil and res.Success == true and type(res.Body) == "string" and res.Body ~= "" then
-                return res.Body
+                return res.Body, 200
             end
         end
     end
@@ -591,69 +583,49 @@ local function httpGet(url)
         return game:HttpGet(url, true)
     end)
     if ok2 and type(body) == "string" and body ~= "" then
-        return body
+        return body, 200
     end
-    return nil
+    return nil, nil
 end
 
 local function looksLikeMenu(src)
     return type(src) == "string" and #src > 1000 and src:find("UnderstandingDestroy", 1, true) ~= nil
 end
 
--- Single fast pass: API latest commit SHA -> Atom feed fallback -> pinned raw fetch -> raw/main cache-busted fetch
-local LATEST_COMMIT_ATOM = "https://github.com/davvood/Understanding-release/commits/main.atom"
-local latestSha = nil -- commit the menu was downloaded from (lets the menu spot newer releases)
+local verifyBase = VERIFY_URL:gsub("/+$", "")
+local latestSha = nil -- SHA of the menu served by the worker (lets the menu spot newer releases)
+
+local function freshQuery()
+    return "&t=" .. tostring(os.time()) .. tostring(math.random(1000, 9999))
+end
+
+local function fetchWorkerVersion()
+    local body = httpGet(verifyBase .. "/version?t=" .. tostring(os.time()) .. tostring(math.random(1000, 9999)))
+    if type(body) ~= "string" or body == "" then
+        return nil
+    end
+    local ok, data = pcall(HttpService.JSONDecode, HttpService, body)
+    if ok and type(data) == "table" and type(data.sha) == "string" and data.sha ~= "" then
+        return data.sha
+    end
+    return nil
+end
+
 local function downloadMenuOnce()
-    local fresh = "?t=" .. tostring(os.time()) .. tostring(math.random(1000, 9999))
-    local sha = nil
-    local apiBody = httpGet(LATEST_COMMIT_API .. fresh)
-    if apiBody then
-        local ok, data = pcall(function()
-            return HttpService:JSONDecode(apiBody)
-        end)
-        if ok and type(data) == "table" and type(data.sha) == "string" and #data.sha == 40 then
-            sha = data.sha
-        end
+    local url = verifyBase .. "/menu?userId=" .. tostring(lp.UserId) .. freshQuery()
+    local body, statusCode = httpGet(url, true)
+    if (statusCode == nil or (statusCode >= 200 and statusCode < 300)) and looksLikeMenu(body) then
+        latestSha = fetchWorkerVersion()
+        return body, "Server", nil
     end
-    if not sha then
-        local atomBody = httpGet(LATEST_COMMIT_ATOM .. fresh)
-        local atomSha = type(atomBody) == "string" and atomBody:match("<entry>.-Grit::Commit/(%x+)") or nil
-        if type(atomSha) == "string" and #atomSha == 40 then
-            sha = atomSha
-        end
-    end
-    if sha then
-        latestSha = sha
-        local pinnedBody = httpGet(RAW .. sha .. "/UnderstandingMenu.lua")
-        if looksLikeMenu(pinnedBody) then
-            return pinnedBody, "GitHub"
+    if type(body) == "string" and body ~= "" then
+        local okJson, res = pcall(HttpService.JSONDecode, HttpService, body)
+        if okJson and type(res) == "table" and type(res.reason) == "string" and res.reason ~= "" then
+            return nil, nil, res.reason
         end
     end
     latestSha = nil
-    local mainBody = httpGet(MENU_URL .. fresh)
-    if looksLikeMenu(mainBody) then
-        return mainBody, "GitHub"
-    end
-    return nil, nil
-end
-
-local function readLocal(file)
-    local ok, src = pcall(function()
-        return isfile and readfile and isfile(file) and readfile(file)
-    end)
-    return ok and looksLikeMenu(src) and src or nil
-end
-
-local function readOfflineFallback()
-    local cached = readLocal(CACHE_FILE)
-    if cached then
-        return cached, "cached copy (GitHub unreachable)"
-    end
-    local localCopy = readLocal(LOCAL_FILE)
-    if localCopy then
-        return localCopy, "workspace copy (GitHub unreachable)"
-    end
-    return nil, nil
+    return nil, nil, nil
 end
 
 -- ── Discord Membership Verification ──────────────────────
@@ -662,9 +634,8 @@ local function verifyDiscordMembership()
         return true
     end
 
-    local verifyBase = VERIFY_URL:gsub("/+$", "")
     local function queryDiscord()
-        local body = httpGet(verifyBase .. "/check?userId=" .. tostring(lp.UserId))
+        local body = httpGet(verifyBase .. "/check?userId=" .. tostring(lp.UserId) .. freshQuery())
         if not body then
             return false, "network"
         end
@@ -716,7 +687,7 @@ local function verifyDiscordMembership()
 
     ensureUi()
     local rpcSent = false
-    if reason ~= "network" then
+    if reason ~= "network" and reason ~= "blacklisted" then
         rpcSent = true
         tryDiscordRpcInvite()
     end
@@ -854,12 +825,14 @@ local function verifyDiscordMembership()
                 finish("verified")
                 return
             end
-            if nextReason ~= "network" and not rpcSent then
+            if nextReason ~= "network" and nextReason ~= "blacklisted" and not rpcSent then
                 rpcSent = true
                 tryDiscordRpcInvite()
             end
             checking = false
-            local reused = renderState(nextReason, nextReason == "network" and "Connection Error" or "Not verified yet")
+            local subText = nextReason == "network" and "Connection Error"
+                or (nextReason == "blacklisted" and "Blacklisted" or "Not verified yet")
+            local reused = renderState(nextReason, subText)
             if reused and primaryBtn and primaryBtn.Parent then
                 primaryBtn.Active = true
                 primaryBtn.Text = nextReason == "network" and "Retry" or "Check Again"
@@ -870,8 +843,11 @@ local function verifyDiscordMembership()
 
     renderState = function(stateReason, subOverride)
         local isError = stateReason == "network"
+        local isBlacklisted = stateReason == "blacklisted"
         local msg
-        if isError then
+        if isBlacklisted then
+            msg = "You have been blacklisted from using Understanding."
+        elseif isError then
             msg =
                 "Couldn't reach the verification server.\nCheck your connection or executor permissions, then click Retry."
         elseif stateReason == "not_in_server" then
@@ -886,14 +862,14 @@ local function verifyDiscordMembership()
 
         status.Size = UDim2.fromOffset(304, textH)
         status.TextTruncate = textH >= 240 and Enum.TextTruncate.AtEnd or Enum.TextTruncate.None
-        if isError then
+        if isError or isBlacklisted then
             status.TextColor3 = COL.red
             pctLbl.TextColor3 = COL.red
             fill.BackgroundColor3 = COL.red
             if cardStroke then
                 tween(cardStroke, 0.22, { Color = COL.red, Transparency = 0.45 })
             end
-            step(msg, 0.12, subOverride or "Connection Error")
+            step(msg, 0.12, subOverride or (isBlacklisted and "Blacklisted" or "Connection Error"))
         else
             status.TextColor3 = COL.txt
             pctLbl.TextColor3 = COL.accent
@@ -906,7 +882,7 @@ local function verifyDiscordMembership()
 
         tween(card, 0.22, { Size = UDim2.fromOffset(340, cardH) })
 
-        local targetMode = isError and "error" or "verify"
+        local targetMode = isBlacklisted and "blacklisted" or (isError and "error" or "verify")
         if actionBar and actionBar.Parent and currentMode == targetMode then
             tween(actionBar, 0.22, { Position = UDim2.fromOffset(18, btnY) })
             return true
@@ -922,7 +898,11 @@ local function verifyDiscordMembership()
         actionBar.BorderSizePixel = 0
         actionBar.Parent = card
 
-        if isError then
+        if isBlacklisted then
+            makeActionButton(actionBar, 0, 304, "Close", "close", function()
+                finish("closed")
+            end)
+        elseif isError then
             primaryBtn = makeActionButton(actionBar, 0, 148, "Retry", "primary", runRecheck)
             makeActionButton(actionBar, 156, 148, "Close", "close", function()
                 finish("closed")
@@ -996,31 +976,23 @@ if not verifyDiscordMembership() then
     return
 end
 
-step("Downloading menu...", 0.25, "GitHub")
-local src, source = downloadMenuOnce()
-if src then
-    if writefile then
-        pcall(writefile, CACHE_FILE, src) -- offline fallback for next time
-    end
-else
-    src, source = readOfflineFallback()
-    if not src then
-        -- Only retry when no offline fallback copy exists on disk yet
-        for attempt = 1, 2 do
-            step("Retrying download (" .. attempt .. "/2)...", 0.25 + attempt * 0.15, "Retrying")
-            task.wait(0.8)
-            src, source = downloadMenuOnce()
-            if src then
-                if writefile then
-                    pcall(writefile, CACHE_FILE, src)
-                end
-                break
-            end
+step("Downloading menu...", 0.25, "Server")
+local src, source, denyReason = downloadMenuOnce()
+if not src and denyReason ~= "blacklisted" then
+    for attempt = 1, 2 do
+        step("Retrying download (" .. attempt .. "/2)...", 0.25 + attempt * 0.15, "Retrying")
+        task.wait(0.8)
+        src, source, denyReason = downloadMenuOnce()
+        if src or denyReason == "blacklisted" then
+            break
         end
     end
 end
+if denyReason == "blacklisted" then
+    return fail("You have been blacklisted from using Understanding.")
+end
 if not src then
-    return fail("Couldn't download the menu and no saved copy was found.")
+    return fail("Couldn't download the menu from the server. Try again in a moment.")
 end
 
 local version = src:match("Understanding%s+(v[%d%.]+)") or src:match("['\"](v%d+[%d%.]+)") or "?"
@@ -1038,9 +1010,9 @@ step("Loaded " .. version .. "  ·  press C to toggle", 1, version)
 task.wait(0.24)
 dismissBeforeLaunch()
 
-_G._UnderstandingLoader = MENU_URL -- fallback for teleports
-_G._UnderstandingLoaderScript = LOADER_URL -- teleports re-run this loader (card, retries, visible errors)
-_G._UnderstandingSha = source == "GitHub" and latestSha or nil
+_G._UnderstandingLoader = nil -- never bypass loader on teleport
+_G._UnderstandingLoaderScript = LOADER_URL -- teleports re-run this loader (verification + card)
+_G._UnderstandingSha = latestSha
 local ok, runErr = pcall(fn)
 if not ok then
     return fail("Menu crashed while starting: " .. tostring(runErr))
