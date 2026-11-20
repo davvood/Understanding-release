@@ -11,8 +11,8 @@ local RAW = "https://raw.githubusercontent.com/davvood/Understanding-release/"
 local BASE = RAW .. "refs/heads/main/"
 local MENU_URL = BASE .. "UnderstandingMenu.lua"
 local LOADER_URL = BASE .. "loader.lua"
-local DISCORD_INVITE = "https://discord.gg/8M9FQzayk2"
-local DISCORD_INVITE_CODE = "8M9FQzayk2"
+local DISCORD_INVITE = "https://discord.gg/h4R9W7gT2H"
+local DISCORD_INVITE_CODE = "h4R9W7gT2H"
 local VERIFY_URL = "https://understanding-verify.understanding-menu.workers.dev" -- set to the deployed Cloudflare Worker URL to enable Discord membership verification
 -- Branch links are cached by GitHub for up to 5 minutes after a publish; links pinned to a
 -- commit are always exact. This API call says which commit is newest. Its answer may be cached
