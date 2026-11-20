@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.34
+- Earmuff Mode (World → Sound): Added VRChat-style Earmuff Mode with a live resizable 3D ground hearing circle (Earmuff Radius 4–120 st, Show Earmuff Circle, custom Earmuff Circle Color), Outside Volume (0% full mute to 100% soft muffle), Mute Game Audio Outside, and optional Mute Global Music
+- Voice Chat & Audio Engine: Gates both legacy Roblox Voice Chat (VoiceChatInternal, preserving players you manually muted) and modern Audio API voices (AudioDeviceInput), plus 3D positional Sound/AudioPlayer sources with edge hysteresis, Loud Sound Limiter coordination, and full automatic restoration on toggle-off or unload
+
 ## v5.33.3
 - Card Divider & Layout Fixes: Fixed Appearance accent swatch row clipping and divider alignment across Home (What's New), Animations, Automations, and Players, with a defensive layout guard so row dividers never collide with child layouts or padding
 - Scaling, Dropdown & Modal Polish: Fixed dropdown checkmark overlap, Menu Scale label width math and slider value overlap, modal card button ordering and Escape priority, and row spacing across Teleports, Appearance, Emotes, and Overlays
