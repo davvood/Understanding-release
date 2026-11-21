@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.35
+- Universal Aim-Assist (Visuals): Smooth client-side camera tracking that works in both first and third person, with Hold/Toggle activation, rebindable Aim Key (defaults to MB2 / right mouse button, supports MB2–MB5 and keyboard keys), Aim Smoothness, Max Distance, Target Part (Head / Torso / Closest), and optional Velocity Prediction
+- Smart Filters & PvE Support: Team Check, Wall Visibility raycast check, Alive Check, Sticky Target (1.5x FOV hysteresis), and Include NPCs / Mobs toggle
+- FOV Circle, Target HUD & Hit Sound (Visuals → Aim Overlays): Customisable FOV Circle overlay, draggable macOS-style Target HUD pill showing locked target name, health bar, and distance, plus optional Hit Sound feedback on target HP drop
+
 ## v5.34.3
 - Worker-Gated Delivery & Blacklist Support: Menu downloads now go through the verification server with real-time blacklist enforcement and faster update checks
 
