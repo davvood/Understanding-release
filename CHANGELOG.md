@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.35.5
+- Aim-Assist Step-by-Step Geometric Smoothing: Replaced the steep power-law drop-off with a smooth geometric progression (0.85 ^ (smooth - 1), ~15% gentler per step) across both mousemoverel and Camera.CFrame tracking so Smoothness 5 feels responsive and every step from 1 to 20 scales evenly without stalling at high values
+
 ## v5.35.4
 - Aim-Assist Zero Flick-Back Fix: Locked-mouse cameras (1st-person / shift-lock / TPS) now turn smoothly via native mousemoverel with sub-pixel fractional accumulation so the game's own camera angles update and never snap back when you release the Aim Key (retains the Camera.CFrame fallback for unlocked cursors or executors without mousemoverel)
 
