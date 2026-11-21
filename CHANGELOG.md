@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.35.4
+- Aim-Assist Zero Flick-Back Fix: Locked-mouse cameras (1st-person / shift-lock / TPS) now turn smoothly via native mousemoverel with sub-pixel fractional accumulation so the game's own camera angles update and never snap back when you release the Aim Key (retains the Camera.CFrame fallback for unlocked cursors or executors without mousemoverel)
+
 ## v5.35.3
 - Aim-Assist True Progressive Smoothing & Mouse Control: Removed the 0.05 per-frame clamp floor and switched to a smooth power curve (24 / (smooth - 1)^1.35, default Smoothness 5) so every step from 2 to 20 feels distinctly gentler; preserved user mouse movement on every frame in both standard and custom-camera games instead of locking out camera control
 
