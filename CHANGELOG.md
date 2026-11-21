@@ -1,5 +1,11 @@
 # Changelog
 
+## v5.37
+- ProximityPrompt Helpers (World → Game Helpers): Instant Interact (0 s hold), Extended Prompt Reach (10–100 st slider), and Interact Through Walls (disables RequiresLineOfSight) with per-prompt original-value restoration on toggle-off and unload
+- Auto-Collect / Item Magnet (World → Game Helpers): Automatically collects nearby dropped tools and touch-collectibles within Magnet Radius (10–200 st) matching an optional comma-separated Magnet Name Filter via firetouchinterest, with a safe unanchored pull fallback
+- CFrame Walk Speed (Character → Movement): Smoothly steps along Humanoid.MoveDirection at CFrame Speed (4–120 st/s) with forward wall-raycast stopping/sliding and automatic pause while seated, flying, or in Freecam
+- Anti-Sit, Anti-Ragdoll & Edge-Guard (Character → Safety): Block accidental seats/traps (auto-pauses whenever Vehicle features are active), clear Ragdoll/FallingDown/PlatformStand locks with clean state restoration, and brake forward velocity/CFrame stepping at platform ledges
+
 ## v5.36
 - Smart Interactive Scanner (Teleports): Auto-groups discovered world objects into Prompts, Clickables, NPCs, Collectibles (dropped tools & touch pickups), Seats, and Spawns sorted by distance, with category filter chips and 1-click Go, Walk/Drive, Use (ProximityPrompt / ClickDetector), Save, and Pin/Unpin actions
 - Object ESP Pinning (Visuals ↔ Teleports): Pin any discovered object directly from Teleports to highlight it in Object ESP (saved per PlaceId), even when Names To Find is empty
