@@ -1,5 +1,9 @@
 # Changelog
 
+## v5.35.1
+- Dedicated Aim Tab: Moved Aim-Assist and Aim Overlays out of Visuals into their own COMBAT → Aim tab, with Aim-Assist clearly labelled on its toggle row and cleanly shown in the Active Features bar
+- Aim-Assist Tracking & Input Fixes: Runs on BindToRenderStep after Roblox's CameraModule (Camera + 1) so camera movement is never overwritten, allows MouseButton2 even when GameProcessedEvent is set (ADS/camera orbit), polls held key/mouse state directly, adds Always On mode, and uses a much snappier smoothing curve (default 4)
+
 ## v5.35
 - Universal Aim-Assist (Visuals): Smooth client-side camera tracking that works in both first and third person, with Hold/Toggle activation, rebindable Aim Key (defaults to MB2 / right mouse button, supports MB2–MB5 and keyboard keys), Aim Smoothness, Max Distance, Target Part (Head / Torso / Closest), and optional Velocity Prediction
 - Smart Filters & PvE Support: Team Check, Wall Visibility raycast check, Alive Check, Sticky Target (1.5x FOV hysteresis), and Include NPCs / Mobs toggle
