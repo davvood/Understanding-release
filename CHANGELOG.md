@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.35.2
+- Aim-Assist Smoothed Locking Fix: Tracks a persistent smoothed look direction across frames so Smoothness > 1 smoothly locks on and follows even in games whose camera scripts reset Camera.CFrame every frame, bound at RenderPriority.Last (default Smoothness 3)
+- Keybind List Integration: Aim-Assist now appears in the Keybind List while enabled (showing MB2 · hold, MB2, or Always) and lights up immediately while holding the active key, toggled on, or Always On (including with Only Active Keybinds)
+- Sticky Target & Wall Check: Sticky Target keeps lock while the target remains on screen or in the look cone and re-checks walls immediately without cache lag
+
 ## v5.35.1
 - Dedicated Aim Tab: Moved Aim-Assist and Aim Overlays out of Visuals into their own COMBAT → Aim tab, with Aim-Assist clearly labelled on its toggle row and cleanly shown in the Active Features bar
 - Aim-Assist Tracking & Input Fixes: Runs on BindToRenderStep after Roblox's CameraModule (Camera + 1) so camera movement is never overwritten, allows MouseButton2 even when GameProcessedEvent is set (ADS/camera orbit), polls held key/mouse state directly, adds Always On mode, and uses a much snappier smoothing curve (default 4)
