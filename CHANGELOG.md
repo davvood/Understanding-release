@@ -1,5 +1,8 @@
 # Changelog
 
+## v5.35.3
+- Aim-Assist True Progressive Smoothing & Mouse Control: Removed the 0.05 per-frame clamp floor and switched to a smooth power curve (24 / (smooth - 1)^1.35, default Smoothness 5) so every step from 2 to 20 feels distinctly gentler; preserved user mouse movement on every frame in both standard and custom-camera games instead of locking out camera control
+
 ## v5.35.2
 - Aim-Assist Smoothed Locking Fix: Tracks a persistent smoothed look direction across frames so Smoothness > 1 smoothly locks on and follows even in games whose camera scripts reset Camera.CFrame every frame, bound at RenderPriority.Last (default Smoothness 3)
 - Keybind List Integration: Aim-Assist now appears in the Keybind List while enabled (showing MB2 · hold, MB2, or Always) and lights up immediately while holding the active key, toggled on, or Always On (including with Only Active Keybinds)
