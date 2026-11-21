@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.36
+- Smart Interactive Scanner (Teleports): Auto-groups discovered world objects into Prompts, Clickables, NPCs, Collectibles (dropped tools & touch pickups), Seats, and Spawns sorted by distance, with category filter chips and 1-click Go, Walk/Drive, Use (ProximityPrompt / ClickDetector), Save, and Pin/Unpin actions
+- Object ESP Pinning (Visuals ↔ Teleports): Pin any discovered object directly from Teleports to highlight it in Object ESP (saved per PlaceId), even when Names To Find is empty
+- Action Recorder & Macro Player (Automations): Record movement waypoints, ProximityPrompt triggers, ClickDetector clicks, and wait intervals into per-game macros, then replay once or on a loop with Playback Speed, Step Delay, Stop Macro, and immediate Panic/Unload teardown
+
 ## v5.35.5
 - Aim-Assist Step-by-Step Geometric Smoothing: Replaced the steep power-law drop-off with a smooth geometric progression (0.85 ^ (smooth - 1), ~15% gentler per step) across both mousemoverel and Camera.CFrame tracking so Smoothness 5 feels responsive and every step from 1 to 20 scales evenly without stalling at high values
 
