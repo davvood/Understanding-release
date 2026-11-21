@@ -1,5 +1,15 @@
 # Changelog
 
+## v5.39
+- Shared Friends Cache & Per-Player Whitelist (Players, Visuals, Aim): Non-yielding cached Api.isFriend(player) and persistent uiState.whitelist helpers (Players -> Whitelist Player button, Visuals -> Ignore Friends / Hide Whitelisted, Aim -> Ignore Friends / Ignore Whitelisted) with immediate ESP refresh and Aim lock release
+- Optional Triggerbot (Aim): Added Triggerbot toggle, Triggerbot Mode (Hold Aim Key / Always On), and Triggerbot Delay (0–500 ms) raycasting forward up to Aim Max Distance with full Team/Alive/NPC/Friend/Whitelist filtering, re-verification after delay, safe dynamic mouse1click / mouse1press+release execution, and immediate Panic/unload stop
+- Hitmarker Crosshair Flash (Aim): Added Hitmarker under Aim Overlays to flash a crisp 4-tick X around the centre crosshair whenever your locked or aimed target takes health damage, fading out smoothly over ~0.18 s
+
+## v5.38
+- Run & Stop Macro Automation Rules (Automations): New 'Run a macro' and 'Stop running macro' rule actions so any trigger (health, keybind, timer, respawn, player join, or object appearing) can launch or halt saved Action Recorder macros for the current PlaceId
+- In-Place Rule Editing (Automations): Added an Edit button on each rule row to load its trigger, value, action, target, scope, and cooldown into the builder form with Save Rule / Cancel Edit controls, preserving rule order and on/off state
+- Macro Export / Import (Action Recorder): Added Copy Macro and Paste Macro using compact validated UMACRO1|... strings (move, prompt, click, and wait schema checks) to share or back up macros per game
+
 ## v5.37
 - ProximityPrompt Helpers (World → Game Helpers): Instant Interact (0 s hold), Extended Prompt Reach (10–100 st slider), and Interact Through Walls (disables RequiresLineOfSight) with per-prompt original-value restoration on toggle-off and unload
 - Auto-Collect / Item Magnet (World → Game Helpers): Automatically collects nearby dropped tools and touch-collectibles within Magnet Radius (10–200 st) matching an optional comma-separated Magnet Name Filter via firetouchinterest, with a safe unanchored pull fallback
