@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.42
+- Added a multi-page Emote Wheel you can hold a key to open and pick emotes from
+- Right-click any animation pack to preview it live on your character
+- Save and load custom animation slot mixes as presets in Animations
+
 ## v5.41
 - Configs now save dropdowns, colours, keybinds, and search filters too
 - Fixed Hit Sound and Hitmarker on final-blow shots and after players respawn
