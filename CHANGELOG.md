@@ -1,5 +1,10 @@
 # Changelog
 
+## v5.43
+- Upgraded the Ctrl+K Spotlight search to quickly launch toggles, actions, saved teleports, configs, and emotes
+- Added HUD layout presets, overlay opacity control, and one-click overlay position reset
+- Added Emote Wheel size scaling, automatic re-emote after respawning, and a refreshed macOS glass look
+
 ## v5.42
 - Added a multi-page Emote Wheel you can hold a key to open and pick emotes from
 - Right-click any animation pack to preview it live on your character
