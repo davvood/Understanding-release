@@ -1,5 +1,30 @@
 # Changelog
 
+## v5.48
+- Made the menu load faster with much lower startup memory by loading Emotes, Players, Teleports, and Wardrobe lists only when you open them
+- Sped up switching between Dark, Light, accent colours, fonts, and glass materials
+- Cut idle background work when tabs are closed and hardened Zoom, Free-Look, and Blink across camera resets
+
+## v5.47
+- Added an in-menu Wardrobe Catalog Browser with one-click Try On plus outfit share codes
+- Added client-side Body-Scale Preview sliders (Height, Width, Head Size) and hardened R6/R15 Try On
+- Added Full Look Presets to save and equip an outfit, animation mix, and Emote Wheel pins together (also in Ctrl+K Spotlight)
+
+## v5.46
+- Added Chat Keyword Alerts in Chat Log plus a 'Chat says' trigger for Automation Rules
+- Added a Macro Step Editor (reorder, adjust delays, delete steps), 3D macro path preview, and a focus-safe Auto-Clicker
+- Added one-click Game Bundle export/import to share configs, teleports, pins, macros, and rules together
+
+## v5.45
+- Added Hold-to-Zoom (with scroll-wheel zoom), 360° Alt Free-Look, and 3D walking path breadcrumbs
+- Added Quick Return Anchor (one-key drop & snap back) and wall-safe Blink / Dash forward
+- Added persistent Player Tags & Notes (shown on ESP and profile cards) plus Proximity Alerts for nearby players
+
+## v5.44
+- Spotlight (Ctrl+K) now works even when the menu is closed and supports player actions, macros, presets, outfits, and quick slider values like 'fov 110'
+- Added a 'This Game' summary card on Home with one-click config switching
+- Added Server Browser sorting (lowest ping, most or fewest players) and direct join by Server ID or join link
+
 ## v5.43
 - Upgraded the Ctrl+K Spotlight search to quickly launch toggles, actions, saved teleports, configs, and emotes
 - Added HUD layout presets, overlay opacity control, and one-click overlay position reset
