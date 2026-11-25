@@ -1,5 +1,35 @@
 # Changelog
 
+## v5.57
+- Added 1-Click Full Backup & Restore in Settings: export or selectively restore all your configs, settings, outfits, and player history via a UBACKUP1 share code or backup file
+- Added Dynamic Island Live Activities: active countdown timers, running macros, waypoint routes, and playing emotes now appear live inside the Dynamic Island pill
+- Completed Audit #3 across Phases 37–42 verifying clean teardown, zero idle background loops, and full compatibility across all 16 tabs
+
+## v5.56
+- Added Multi-Stop Waypoint Routes in Teleports: chain saved places into ordered patrol or farm loops (Teleport, Walk, or Drive) with per-stop pauses, 3D route beams, and Macro Runner pill control
+- Added a live 3D Jump & Fall Trajectory Preview in Character showing your predicted landing arc and drop height while airborne
+- Added a Performance Telemetry floating pill in Visuals with a live FPS sparkline graph, ping jitter, and Lua memory readout
+
+## v5.55
+- Added Post-Processing & Color Grading Studio in World with curated presets (Cinematic Warm, Noir, Cyberpunk, Soft Pastel, Crisp HDR), Bloom, Saturation, Contrast, Tint, and Depth of Field
+- Upgraded Freecam with smooth inertia damping, Z/X camera tilt roll, and a Keyframe Dolly recorder (2 to 8 camera points)
+- Added 1-key Clean Screenshot Mode in Visuals to temporarily hide the menu, overlays, and Roblox UI for clean captures
+
+## v5.54
+- Added Cross-Session Player History in Players (remembers recently met players, tags, notes, and timestamps across servers) plus instant Tagged Player Join Alerts
+- Added a draggable Event Timers floating pill in Visuals for named countdown timers and stopwatches with warning alerts
+- Upgraded Automations with Start Timer and multi-step action chains, plus new triggers for nearby players, tagged player joins, and low FPS
+
+## v5.53
+- Added Top Compass Bar and Visual Sound Compass overlays in Visuals, showing bearings, saved waypoints, return anchors, tagged players, and nearby 3D sound directions
+- Upgraded Player ESP with optional 3D bounding boxes, smooth damage-ghost health drain trails, and player look-direction sightlines
+- Added Hit Feedback Studio in Aim with built-in or custom hit sounds, volume and pitch controls, custom hitmarker colours, 4 hitmarker styles, and a one-click test button
+
+## v5.52
+- Added Keybind Studio in Settings to search, rebind, switch Toggle/Hold mode, spot conflicts, or clear any keybind from one place
+- Added Quick Config Cycling: star your favourite configs and bind a Config Cycle Key to swap between setups in one press
+- Added Reset Tab Defaults in Settings to safely reset any single tab back to defaults without deleting your saved configs or presets
+
 ## v5.51
 - Added Floating Mini-Widgets in Visuals: pin a Now Playing Emote pill (speed -/+ and Stop), Macro Runner pill (live step/loop bar + Play/Stop), or Pinned Target card (avatar, health, distance, TP / Spec / Follow) outside the menu
 - All three floating mini-widgets work with Edit HUD Layout, Snap Grid, Overlay Opacity, Reset Positions, Custom HUD Presets, and Dark/Light themes
