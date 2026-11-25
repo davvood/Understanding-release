@@ -1,5 +1,19 @@
 # Changelog
 
+## v5.51
+- Added Floating Mini-Widgets in Visuals: pin a Now Playing Emote pill (speed -/+ and Stop), Macro Runner pill (live step/loop bar + Play/Stop), or Pinned Target card (avatar, health, distance, TP / Spec / Follow) outside the menu
+- All three floating mini-widgets work with Edit HUD Layout, Snap Grid, Overlay Opacity, Reset Positions, Custom HUD Presets, and Dark/Light themes
+
+## v5.50
+- Added an interactive Edit HUD Layout mode with snap-to-grid guides, alignment hairlines, live coordinates, and per-overlay reset buttons
+- Added a Snap Grid Size selector (Off, 8 px, 16 px, 24 px) and a floating editor toolbar with Escape-to-close
+- Added Custom Saved HUD Presets (save and load your overlay toggles, positions, and opacity anytime — also from Ctrl+K Spotlight)
+
+## v5.49
+- Added 4 new themes (Midnight OLED, Rosé Pine, High Contrast, Sunset Light) plus quick theme switching from Ctrl+K Spotlight
+- Added Theme Studio controls in Appearance to customize Corner Style, Glass Tint, and Background Blur Strength
+- Added one-click Copy and Paste Theme Codes to share your look and a Reset Appearance button
+
 ## v5.48
 - Made the menu load faster with much lower startup memory by loading Emotes, Players, Teleports, and Wardrobe lists only when you open them
 - Sped up switching between Dark, Light, accent colours, fonts, and glass materials
